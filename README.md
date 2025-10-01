@@ -1,6 +1,9 @@
 # au-skramz-directory
 source code for au-skramz-directory
 
+# TODO
+https://github.com/drsh0/au-skramz-directory/blob/main/TODO.md
+
 # License
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
