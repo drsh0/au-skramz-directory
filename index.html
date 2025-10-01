@@ -452,20 +452,15 @@
 
                     <div
                         id="loadMoreContainer"
-                        style="
-                            text-align: center;
-                            margin: 10px 0;
-                            display: none;
-                        "
+                        style="text-align: center; margin: 10px 0"
                     >
-                        <button id="loadMoreBtn" onclick="loadMoreMessages()">
+                        <button
+                            id="loadMoreBtn"
+                            onclick="loadMoreMessages()"
+                            disabled
+                        >
                             load more messages
                         </button>
-                        <progress
-                            id="loadingProgress"
-                            max="100"
-                            style="display: none; width: 100%; margin-top: 5px"
-                        ></progress>
                     </div>
 
                     <div class="field-row-stacked">
@@ -552,12 +547,9 @@
                         chatMessages.appendChild(messageDiv);
                     });
 
-                    // Update load more button visibility
-                    const loadMoreContainer =
-                        document.getElementById("loadMoreContainer");
-                    loadMoreContainer.style.display = hasMoreMessages
-                        ? "block"
-                        : "none";
+                    // Update load more button state
+                    const loadMoreBtn = document.getElementById("loadMoreBtn");
+                    loadMoreBtn.disabled = !hasMoreMessages;
 
                     // Keep scroll position at top to show most recent messages
                 } catch (error) {
@@ -633,23 +625,9 @@
 
             async function loadMoreMessages() {
                 const loadMoreBtn = document.getElementById("loadMoreBtn");
-                const loadingProgress =
-                    document.getElementById("loadingProgress");
+                loadMoreBtn.disabled = true;
 
-                // Show progress bar and hide button
-                loadMoreBtn.style.display = "none";
-                loadingProgress.style.display = "block";
-                loadingProgress.removeAttribute("value"); // Indeterminate state
-
-                try {
-                    await loadMessages(true);
-                } finally {
-                    // Hide progress bar and show button again if there are more messages
-                    loadingProgress.style.display = "none";
-                    if (hasMoreMessages) {
-                        loadMoreBtn.style.display = "inline-block";
-                    }
-                }
+                await loadMessages(true);
             }
 
             function scrollToTop() {
