@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="straya skramz directory">
+    <meta name="keywords" content="screamo, skramz, australian music, hardcore, labels, archives">
+    <meta name="author" content="straya skramz directory">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="straya skramz directory">
+    <meta property="og:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="straya skramz directory">
+    <meta property="twitter:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
+    
+    <title>straya skramz directory</title>
+    
+    <!-- Favicon implementation -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧸</text></svg>">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TpSIVwXYQcchQnSyIijhqFYpQIdQKrTqYXPoFTRqSFBdHwbXg4Mdi1cHFWVcHV0EQ/ABxdHJSdJES/5cUWsR4cNyPd/ced+8AoVFhqtkTA1TNMtKJuJjNrYrBVwTQhwHMIiYxU0+kFzPwHF/38PH1LsqzvM/9OXqVvMkAn0g8y3TDIt4gntm0dM77xGFWkhTic+Jxgy5I/Mh12eU3zkWHBZ4ZNjKpeeIwsVjsYLmDWclQiaeJI4qqUb6QdVnhvMVZrdRY6578haG8tpLmOs1hJLCEJaQgQkYNZVRgIUqrRoqJNO3HPfxDjj9JLplcZTByLKAKFZLjB/+D392ChclONykYB7pfbPtjFAjuAs267e9v2267E+A/A1da219tALOfpNfbWvQI6N0GLq7bmrIHXO4A/U+GbMqu5Kcp5PPA+xl9Uw7ovwW61tzeWvs4fQAy1NXyDXBwCIwUKXvd4929nb39e6bV3w8z5nKKjQplvgAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+kDCQwTHtYOj3cAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAeklEQVRYw+2WQQqAMAxEX+JN7CpCu6m9/4U8gIggFKHQlqZJ8BdcZHgwySTTNIUxxpxSSikppZRSSikppZRSSilN0zTNW4wx5hhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY4wxxhhjjDHGGGOMMcYYY6w=">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>">
+    <link rel="manifest" href="data:application/json,{&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
+    <meta name="theme-color" content="#c0c0c0">
+    
+    <!-- XP.css from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xp.css@0.2.3/dist/XP.css">
+    
+    <!-- Custom styles for responsiveness and enhancements -->
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'MS Sans Serif', sans-serif;
+            background: #c0c0c0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #c0c0c0;
+        }
+        
+        .window {
+            margin-bottom: 20px;
+        }
+        
+        .section-content {
+            padding: 15px;
+        }
+        
+        .directory-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .directory-list li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #808080;
+        }
+        
+        .directory-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .directory-link {
+            color: #000080;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .directory-link:hover {
+            color: #800080;
+        }
+        
+        .intro-placeholder {
+            background: #000;
+            color: #c0c0c0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 8px;
+            border: 2px inset #c0c0c0;
+        }
+        
+        .toc {
+            margin: 0;
+        }
+        
+        .toc a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            color: #ffff00;
+            text-decoration: underline;
+        }
+        
+        .tree-view {
+            font-family: 'MS Sans Serif', sans-serif;
+        }
+        
+        .tree-view a {
+            color: #000080;
+            text-decoration: underline;
+        }
+        
+        .tree-view a:hover {
+            color: #800080;
+        }
+        
+        .back-to-top {
+            text-align: center;
+            margin: 30px 0 20px 0;
+        }
+        
+        .guestbook-container {
+            margin-top: 30px;
+        }
+        
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            background: white;
+            border: 2px inset #c0c0c0;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .message {
+            margin-bottom: 5px;
+            padding: 2px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+        
+        .message-author {
+            font-weight: bold;
+            color: #000080;
+        }
+        
+        .message-time {
+            color: #666;
+            font-size: 10px;
+        }
+        
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre;
+            margin: 0;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .archive-section h4 {
+            font-family: 'MS Sans Serif', sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            padding: 0;
+            color: #000;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .window .title-bar {
+                font-size: 12px;
+            }
+            
+            .field-row-stacked input,
+            .field-row-stacked textarea,
+            .field-row-stacked button {
+                margin-bottom: 5px;
+            }
+            
+            .ascii-art {
+                font-size: 10px;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .guestbook-container,
+            .field-row-stacked {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Greeting Window -->
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">skramz directory: straya</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="ascii-art">░█▀▀░█░█░█▀▄░█▀█░█▄█░▀▀█░█░█░█░░░▀█▀░█▀▀░█▀▀
+░▀▀█░█▀▄░█▀▄░█▀█░█░█░▄▀░░░▀█░█░░░░█░░█▀▀░█▀▀
+░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░░░▀░▀▀▀░▀▀▀░▀░░░▀▀▀</div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">table of contents</div>
+            </div>
+            <div class="window-body">
+                <div class="intro-placeholder">
+                    <code class="toc">
+<a href="#labels">1. labels</a><br>
+<a href="#archives">2. archives</a><br>
+<a href="#guestbook">3. guestbook</a></code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Labels -->
+        <div class="window" id="labels">
+            <div class="title-bar">
+                <div class="title-bar-text">labels</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="section-content">
+                    <ul class="tree-view">
+                        <li><a href="https://bsdj.bandcamp.com/" target="_blank">bsdj</a></li>
+                        <li><a href="https://www.kittyrecords.net/" target="_blank">kitty records</a></li>
+                        <li><a href="https://www.sorehorse.net/" target="_blank">sore horse</a></li>
+                        <li><a href="https://tactic666.bandcamp.com/" target="_blank">tactic (records)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Archives -->
+        <div class="window" id="archives">
+            <div class="title-bar">
+                <div class="title-bar-text">archives</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <menu role="tablist">
+                    <button aria-selected="true" aria-controls="bands">bands</button>
+                    <button aria-controls="video-audio">video/audio</button>
+                    <button aria-controls="venues">venues</button>
+                    <button aria-controls="playlists">playlists</button>
+                    <button aria-controls="links">links</button>
+                </menu>
+                
+                <article role="tabpanel" id="bands">
+                    <p>here is a list of australian screamo and adjacent bands that are being collaboratively catalogued. this is a work in progress and will open it up soon for everyone to work on and add stuff we've missed.</p>
+                    <ul class="tree-view">
+                        <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRJQcCBRIyvqUrH0jmWHEh_xiFB3Bz8JNMCgJZ2l13xsz1AP2RDfk0S7xPW8XyArB2cR-Yf2pSwNfeI/pubhtml" target="_blank">australian screamo bands spreadsheet</a></li>
+                    </ul>
+                </article>
+
+                <article role="tabpanel" hidden id="video-audio" class="archive-section">
+                    <h4>video archives</h4>
+                    <ul class="tree-view">
+                        <li><a href="https://www.youtube.com/channel/UC0JmBbPfE4OEhAyFneSfh1g" target="_blank">bski productions</a></li>
+                        <li><a href="https://www.youtube.com/@PAIN.PROGRAM" target="_blank">pain.program</a></li>
+                        <li><a href="https://www.youtube.com/channel/UC4Xhv0KzmrXch-dKRLoEOlA" target="_blank">tactic666</a></li>
+                    </ul>
+                    
+                    <h4>audio archives</h4>
+                    <ul class="tree-view">
+                        <li>&lt;to be added&gt;</li>
+                    </ul>
+                </article>
+
+                <article role="tabpanel" hidden id="venues">
+                    <ul class="tree-view">
+                        <li>&lt;to be added&gt;</li>
+                    </ul>
+                </article>
+
+                <article role="tabpanel" hidden id="playlists">
+                    <ul class="tree-view">
+                        <li><a href="https://www.instagram.com/p/DIzd0h9M00N/" target="_blank">emocore.peter's condensed australian emo guide</a></li>
+                        <li><a href="https://www.nts.live/shows/your-specialist-subject/episodes/your-specialist-subject-an-incomplete-snapshot-of-skramz-in-australia-2001---2009-1st-january-2025" target="_blank">nts radio's skramz incomplete snapshot 2001-2009</a></li>
+                    </ul>
+                </article>
+
+                <article role="tabpanel" hidden id="links" class="archive-section">
+                    <h4>discord servers</h4>
+                    <ul class="tree-view">
+                        <li><a href="https://discord.gg/5XERAYmQG8" target="_blank">bsdj</a></li>
+                    </ul>
+                    
+                    <h4>other links</h4>
+                    <ul class="tree-view">
+                        <li>&lt;to be added&gt;</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+
+        <!-- Guestbook/Chat -->
+        <div class="window guestbook-container" id="guestbook">
+            <div class="title-bar">
+                <div class="title-bar-text">guestbook</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>this is a chatbox. say hello and talk about things</p>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages will be loaded from database -->
+                </div>
+                
+                <div class="field-row-stacked">
+                    <label for="nameInput">name:</label>
+                    <input type="text" id="nameInput" placeholder="your name..." maxlength="20">
+                </div>
+                
+                <div class="field-row-stacked">
+                    <label for="messageInput">message:</label>
+                    <textarea id="messageInput" rows="4" placeholder="your message..." maxlength="200"></textarea>
+                </div>
+                
+                <div class="field-row-stacked">
+                    <button id="sendButton" onclick="addMessage()">send</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back to top button -->
+        <div class="back-to-top">
+            <button onclick="scrollToTop()">back to top</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://guestbook-api.measures-jugging.workers.dev'; // Replace with your worker URL
+        
+       async function loadMessages() {
+            try {
+                const response = await fetch(`${API_BASE}/api/messages`);
+                const messages = await response.json();
+                
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = '';
+                
+                messages.forEach(msg => {
+                    // Convert UTC to Australian Eastern time
+                    const utcDate = new Date(msg.timestamp + 'Z'); // Add Z to ensure UTC interpretation
+                    const ausTime = utcDate.toLocaleString('en-AU', {
+                        timeZone: 'Australia/Sydney',
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    });
+                    
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.innerHTML = `
+                        <span class="message-author">${escapeHtml(msg.name)}:</span>
+                        <span class="message-time">[${ausTime}]</span><br>
+                        ${escapeHtml(msg.message)}
+                    `;
+                    chatMessages.appendChild(messageDiv);
+                });
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('Failed to load messages:', error);
+            }
+        }
+        
+        async function addMessage() {
+            const nameInput = document.getElementById('nameInput');
+            const messageInput = document.getElementById('messageInput');
+            
+            const name = nameInput.value.trim();
+            const message = messageInput.value.trim();
+            
+            if (name && message) {
+                try {
+                    const response = await fetch(`${API_BASE}/api/messages`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name, message })
+                    });
+                    
+                    if (response.ok) {
+                        messageInput.value = '';
+                        messageInput.focus();
+                        await loadMessages(); // Reload messages
+                    } else {
+                        alert('failed to send message. please try again.');
+                    }
+                } catch (error) {
+                    alert('network error. please try again.');
+                }
+            } else {
+                alert('please enter both name and message!');
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function scrollToTop() {
+            window.scrollTo(0, 0);
+        }
+        
+        // Allow Enter key to send message
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addMessage();
+            }
+        });
+        
+        // Load messages when page loads and setup tab functionality
+        window.addEventListener('load', function() {
+            loadMessages();
+            
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('menu[role="tablist"] button');
+            const tabPanels = document.querySelectorAll('article[role="tabpanel"]');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove aria-selected from all buttons
+                    tabButtons.forEach(btn => btn.removeAttribute('aria-selected'));
+                    // Add aria-selected to clicked button
+                    this.setAttribute('aria-selected', 'true');
+                    
+                    // Hide all panels
+                    tabPanels.forEach(panel => panel.setAttribute('hidden', ''));
+                    // Show target panel
+                    const targetPanel = document.getElementById(this.getAttribute('aria-controls'));
+                    if (targetPanel) {
+                        targetPanel.removeAttribute('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
