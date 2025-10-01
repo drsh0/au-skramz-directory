@@ -16,3 +16,6 @@
 - [ ] go through comments and add features in here in todo
 - [ ] add visitor count
 
+## devops
+- [ ] connect this repo to cloudflare so everything promoted to master ends up getting auto deployed
+  - [ ] set up staging previews via pipeline/actions as well 
