@@ -9,8 +9,16 @@ let currentYear = currentDate.getFullYear();
 
 let gigAPIData = "";
 
+function getGoogleApiKey() {
+  return "";
+}
+
+function getGoogleSheetsID() {
+  return "";
+}
+
 window.onload = function(){
-    var apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/[SHEET-ID]]/values/gig%20calendar?key=[API-KEY]';
+    var apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${getGoogleSheetsID()}/values/gig%20calendar?key=${getGoogleApiKey()}`;
     fetch(apiUrl).then(response => {
         return response.json();
     }).then(data => {
