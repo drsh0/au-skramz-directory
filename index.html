@@ -357,9 +357,21 @@
                     </article>
 
                     <article role="tabpanel" hidden id="venues">
-                        <ul class="tree-view">
-                            <li>&lt;to be added&gt;</li>
-                        </ul>
+                        <select name="city" id="city-selector">
+                            <option value="sydney">sydney</option>
+                            <option value="brisbane">brisbane</option>
+                            <option value="adelaide">adelaide</option>
+                            <option value="melbourne">melbourne</option>
+                            <option value="canberra">canberra</option>
+                            <option value="perth">perth</option>
+                            <option value="wollongong">wollongong</option>
+                            <option value="nambour">nambour</option>
+                            <option value="newcastle">newcastle</option>
+                        </select>
+                        <script src="venues.js"></script>
+                        <div class="venue-names" id="venue-names">
+                                     <!-- Messages will be loaded from database -->
+                        </div>
                     </article>
 
                     <article role="tabpanel" hidden id="playlists">
