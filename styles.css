@@ -57,6 +57,7 @@ table, th, td {
   border: 2px solid black;
   width: 100%;
   table-layout: fixed;
+  word-wrap: break-word;
 }
 .social-icon {
 margin: 5px;
