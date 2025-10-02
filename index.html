@@ -309,7 +309,7 @@
                             this is a work in progress and will open it up soon
                             for everyone to work on and add stuff we've missed.
                         </p>
-                        <ul class="tree-view">
+                        <ul class="tree-view" margin="5px">
                             <li>
                                 <a
                                     href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRJQcCBRIyvqUrH0jmWHEh_xiFB3Bz8JNMCgJZ2l13xsz1AP2RDfk0S7xPW8XyArB2cR-Yf2pSwNfeI/pubhtml"
@@ -318,6 +318,43 @@
                                 >
                             </li>
                         </ul>
+                        <select name="alphabet" id="alphabet-selector" class="dropdown-margin">
+                            <option ></option>
+                            <option >#</option>
+                            <option >a</option>
+                            <option >b</option>
+                            <option >c</option>
+                            <option >d</option>
+                            <option >e</option>
+                            <option >f</option>
+                            <option >g</option>
+                            <option >h</option>
+                            <option >i</option>
+                            <option >j</option>
+                            <option >k</option>
+                            <option >l</option>
+                            <option >m</option>
+                            <option >n</option>
+                            <option >o</option>
+                            <option >p</option>
+                            <option >q</option>
+                            <option >r</option>
+                            <option >s</option>
+                            <option >t</option>
+                            <option >u</option>
+                            <option >v</option>
+                            <option >w</option>
+                            <option >x</option>
+                            <option >y</option>
+                            <option >z</option>
+                        </select>
+                        <select name="location" id="location-selector" class="dropdown-margin"><option ></option></select>
+                        <select name="status" id="artist-status-selector" class="dropdown-margin"><option ></option></select>
+                        <select name="genre" id="genre-selector" class="dropdown-margin"><option ></option></select>
+                        <script src="artists.js"></script>
+                        <div class="artist-names" id="artist-names">
+                             <!-- Messages will be loaded from database -->
+                        </div>
                     </article>
 
                     <article

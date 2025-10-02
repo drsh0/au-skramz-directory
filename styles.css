@@ -53,3 +53,14 @@ body {
   color: #fff;
   border-radius: 50%;
 }
+table, th, td {
+  border: 2px solid black;
+  width: 100%;
+  table-layout: fixed;
+}
+.social-icon {
+margin: 5px;
+}
+.dropdown-margin {
+  margin: 5px;
+}
