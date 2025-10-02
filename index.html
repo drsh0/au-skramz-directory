@@ -55,7 +55,7 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/xp.css@0.2.3/dist/XP.css"
         />
-
+        <link rel="stylesheet" href="styles.css">
         <!-- Custom styles for responsiveness and enhancements -->
         <style>
             body {
@@ -434,6 +434,45 @@
                             <li>&lt;to be added&gt;</li>
                         </ul>
                     </article>
+                </div>
+            </div>
+
+            <!---GIG CALENDAR-->
+            <div class="window" id="gig-calendar">
+                <div class="title-bar">
+                    <div class="title-bar-text">gig calendar</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="section-content">
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <button id="prev-month">‹</button>
+                                <div id="month-year"></div>
+                                <button id="next-month">›</button>
+                            </div>
+                            <div class="calendar-body">
+                                <div class="calendar-weekdays">
+                                  <div>Sun</div>
+                                  <div>Mon</div>
+                                  <div>Tue</div>
+                                  <div>Wed</div>
+                                  <div>Thu</div>
+                                  <div>Fri</div>
+                                  <div>Sat</div>
+                                </div>
+                                <div class="calendar-dates">
+                                    <!-- Dates will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                        <script src="calendar.js"></script>
+                    </div>
+                    <div class="gig-events" id="gig-events">
+                                     <!-- Messages will be loaded from database -->
+                    </div>
                 </div>
             </div>
 
