@@ -41,6 +41,7 @@ function displayVenuesInHTML(venueString, containerId, venueData) {
           <h4>${gig[0]}</h5> <!-- Headliner -->
           <p><strong>Location:</strong> ${gig[2]}</p>
           <p><strong>Status:</strong> ${gig[3] ? gig[3] : 'Unknown'}</p>
+          ${gig[5] ? `<p><strong>Editors Note:</strong> ${gig[5]}</p>` : ''}
           ${gig[4] ? `<a href="${gig[4]}" target="_blank">More Info</a>` : ''}
         </div>
       `;
