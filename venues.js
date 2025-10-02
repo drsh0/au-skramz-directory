@@ -1,4 +1,5 @@
 const cityDropdown = document.getElementById('city-selector');
+const statusDropdown = document.getElementById('status-selector');
 
 function getGoogleApiKey() {
   return "";
@@ -17,7 +18,8 @@ function renderVenues()
     fetch(apiUrl).then(response => {
         return response.json();
     }).then(data => {
-        displayVenuesInHTML(cityDropdown.options[cityDropdown.selectedIndex].text,'venue-names', data);
+        venueAPIData = data;
+        displayVenuesInHTML(cityDropdown.options[cityDropdown.selectedIndex].text,statusDropdown.options[statusDropdown.selectedIndex].text, 'venue-names', data);
     }).catch(err => {
       // Do something for an error here
     });
@@ -25,12 +27,19 @@ function renderVenues()
 
 renderVenues()
 
-function displayVenuesInHTML(venueString, containerId, venueData) {
+function displayVenuesInHTML(venueString, statusString, containerId, venueData) {
   const headers = venueData.values[0];
   const venueRows = venueData.values.slice(1);
   const cityColumnIndex = headers.indexOf('location_city');
+  const statusIndex = headers.indexOf('status');
   
-  const matchingVenues = venueRows.filter(row => row[cityColumnIndex] === venueString);
+     matchingVenues = venueRows.filter(row => row[cityColumnIndex] === venueString);
+
+    if (statusString !== "")
+    {
+        matchingVenues = matchingVenues.filter(row => row[statusIndex] === statusString);
+    }
+
   const container = document.getElementById(containerId);
   
   if (matchingVenues.length > 0) {
@@ -40,7 +49,7 @@ function displayVenuesInHTML(venueString, containerId, venueData) {
         <div class="venue-card">
           <h4>${gig[0]}</h5> <!-- Headliner -->
           <p><strong>Location:</strong> ${gig[2]}</p>
-          <p><strong>Status:</strong> ${gig[3] ? gig[3] : 'Unknown'}</p>
+          <p><strong>Status:</strong> ${gig[3] ? gig[3] : 'unknown'}</p>
           ${gig[5] ? `<p><strong>Editors Note:</strong> ${gig[5]}</p>` : ''}
           ${gig[4] ? `<a href="${gig[4]}" target="_blank">More Info</a>` : ''}
         </div>
@@ -48,13 +57,20 @@ function displayVenuesInHTML(venueString, containerId, venueData) {
     });
     container.innerHTML = html;
   } else {
-    container.innerHTML = `<p>No gigs found for ${venueString}</p>`;
+    container.innerHTML = `<p>No venues found for ${venueString}</p>`;
   }
 }
 
 
 cityDropdown.addEventListener(
      'change',
-     function() { renderVenues(); },
+     function() { displayVenuesInHTML(cityDropdown.options[cityDropdown.selectedIndex].text,statusDropdown.options[statusDropdown.selectedIndex].text, 'venue-names', venueAPIData); },
+     false
+  );
+
+  
+statusDropdown.addEventListener(
+     'change',
+     function() { displayVenuesInHTML(cityDropdown.options[cityDropdown.selectedIndex].text,statusDropdown.options[statusDropdown.selectedIndex].text, 'venue-names', venueAPIData); },
      false
   );
