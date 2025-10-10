@@ -489,7 +489,11 @@
                 <div class="chat-messages" id="chatMessages">
                     <!-- Messages will be loaded from database -->
                 </div>
-                
+
+                <div class="field-row-stacked" style="text-align: center;">
+                    <button id="loadMoreBtn" onclick="loadMoreMessages()">load more messages</button>
+                </div>
+
                 <div class="field-row-stacked">
                     <label for="nameInput">name:</label>
                     <input type="text" id="nameInput" placeholder="your name..." maxlength="20">
@@ -513,21 +517,38 @@
 
         <!-- Footer acknowledgement -->
         <blockquote class="footer-quote">
-            sovereignty never ceded. always was, always will be aboriginal land.
+            sovereignty was never ceded. always was, always will be aboriginal land.
+                <br><a href="/about">credits/about</a>
         </blockquote>
     </div>
 
     <script>
         const API_BASE = 'https://guestbook-api.measures-jugging.workers.dev'; // Replace with your worker URL
-        
-       async function loadMessages() {
+        let oldestMessageId = null;
+        let hasMoreMessages = true;
+
+       async function loadMessages(append = false) {
             try {
-                const response = await fetch(`${API_BASE}/api/messages`);
+                const url = append && oldestMessageId
+                    ? `${API_BASE}/api/messages?before=${oldestMessageId}`
+                    : `${API_BASE}/api/messages`;
+
+                const response = await fetch(url);
                 const messages = await response.json();
-                
+
                 const chatMessages = document.getElementById('chatMessages');
-                chatMessages.innerHTML = '';
-                
+
+                if (!append) {
+                    chatMessages.innerHTML = '';
+                    oldestMessageId = null;
+                }
+
+                if (messages.length === 0) {
+                    hasMoreMessages = false;
+                    updateLoadMoreButton();
+                    return;
+                }
+
                 messages.forEach(msg => {
                     // Convert UTC to Australian Eastern time
                     const utcDate = new Date(msg.timestamp + 'Z'); // Add Z to ensure UTC interpretation
@@ -540,7 +561,7 @@
                         minute: '2-digit',
                         hour12: false
                     });
-                    
+
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message';
                     const nameColor = getColorForName(msg.name);
@@ -550,11 +571,35 @@
                         ${escapeHtml(msg.message)}
                     `;
                     chatMessages.appendChild(messageDiv);
+
+                    // Track the oldest message ID for pagination
+                    oldestMessageId = msg.id;
                 });
-                
+
+                // Check if we got fewer messages than the page limit (30)
+                hasMoreMessages = messages.length === 30;
+                updateLoadMoreButton();
+
                 // chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Failed to load messages:', error);
+            }
+        }
+
+        async function loadMoreMessages() {
+            await loadMessages(true);
+        }
+
+        function updateLoadMoreButton() {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                if (hasMoreMessages) {
+                    loadMoreBtn.disabled = false;
+                    loadMoreBtn.textContent = 'load more messages';
+                } else {
+                    loadMoreBtn.disabled = true;
+                    loadMoreBtn.textContent = 'no more messages';
+                }
             }
         }
         

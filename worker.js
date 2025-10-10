@@ -5,7 +5,7 @@ var worker_default = {
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Headers": "Content-Type"
     };
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders });
@@ -13,67 +13,45 @@ var worker_default = {
     if (url.pathname === "/api/messages") {
       if (request.method === "GET") {
         try {
-          const before = url.searchParams.get("before");
-          const limit = 30;
-
+          const beforeId = url.searchParams.get("before");
           let query;
-          if (before) {
+          if (beforeId) {
             query = env.DB.prepare(
-              'SELECT id, name, message, datetime(timestamp, "localtime") as timestamp FROM messages WHERE id < ? ORDER BY id DESC LIMIT ?',
-            ).bind(before, limit + 1);
+              'SELECT id, name, message, datetime(timestamp, "localtime") as timestamp FROM messages WHERE id < ? ORDER BY id DESC LIMIT 30'
+            ).bind(beforeId);
           } else {
             query = env.DB.prepare(
-              'SELECT id, name, message, datetime(timestamp, "localtime") as timestamp FROM messages ORDER BY id DESC LIMIT ?',
-            ).bind(limit + 1);
+              'SELECT id, name, message, datetime(timestamp, "localtime") as timestamp FROM messages ORDER BY id DESC LIMIT 30'
+            );
           }
-
           const { results } = await query.all();
-          const hasMore = results.length > limit;
-          const messages = hasMore ? results.slice(0, limit) : results;
-
-          return new Response(
-            JSON.stringify({
-              messages,
-              has_more: hasMore,
-              oldest_id:
-                messages.length > 0 ? messages[messages.length - 1].id : null,
-            }),
-            {
-              headers: { ...corsHeaders, "Content-Type": "application/json" },
-            },
-          );
-        } catch (error) {
-          return new Response("Database error", {
-            status: 500,
-            headers: corsHeaders,
+          return new Response(JSON.stringify(results), {
+            headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
+        } catch (error) {
+          return new Response("Database error", { status: 500, headers: corsHeaders });
         }
       }
       if (request.method === "POST") {
         try {
           const { name, message } = await request.json();
           if (!name || !message || name.length > 20 || message.length > 200) {
-            return new Response("Invalid input", {
-              status: 400,
-              headers: corsHeaders,
-            });
+            return new Response("Invalid input", { status: 400, headers: corsHeaders });
           }
           await env.DB.prepare(
-            "INSERT INTO messages (name, message) VALUES (?, ?)",
-          )
-            .bind(name.trim(), message.trim())
-            .run();
+            "INSERT INTO messages (name, message) VALUES (?, ?)"
+          ).bind(name.trim(), message.trim()).run();
           return new Response("Message added", { headers: corsHeaders });
         } catch (error) {
-          return new Response("Database error", {
-            status: 500,
-            headers: corsHeaders,
-          });
+          return new Response("Database error", { status: 500, headers: corsHeaders });
         }
       }
     }
     return new Response("Not found", { status: 404, headers: corsHeaders });
-  },
+  }
 };
-export { worker_default as default };
+export {
+  worker_default as default
+};
 //# sourceMappingURL=worker.js.map
+
