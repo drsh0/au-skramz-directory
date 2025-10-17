@@ -27,190 +27,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>">
     <link rel="manifest" href="data:application/json,{&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
     <meta name="theme-color" content="#c0c0c0">
-    
+
+    <!-- Sheets utility functions -->
+    <script src="sheets-utils.js"></script>
+
     <!-- XP.css from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xp.css@0.2.3/dist/XP.css">
 
     <!-- Tahoma font from CDN -->
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/tahoma">
-
+    <link rel="stylesheet" href="styles.css">
     <!-- Custom styles for responsiveness and enhancements -->
     <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Tahoma, 'MS Sans Serif', sans-serif;
-            background: #c0c0c0;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #c0c0c0;
-        }
-        
-        .window {
-            margin-bottom: 20px;
-        }
-        
-        .section-content {
-            padding: 15px;
-        }
-        
-        .directory-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .directory-list li {
-            padding: 8px 0;
-            border-bottom: 1px dotted #808080;
-        }
-        
-        .directory-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .directory-link {
-            color: #000080;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .directory-link:hover {
-            color: #800080;
-        }
-        
-        .intro-placeholder {
-            background: #000;
-            color: #c0c0c0;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            padding: 8px;
-            border: 2px inset #c0c0c0;
-        }
-        
-        .toc {
-            margin: 0;
-        }
-        
-        .toc a {
-            color: #00ff00;
-            text-decoration: underline;
-            font-family: "Perfect DOS VGA 437 Win", monospace;
-        }
-
-        .toc a:hover {
-            color: #00ff7f;
-        }
-        
-        .tree-view {
-            font-family: Tahoma, 'MS Sans Serif', sans-serif;
-        }
-        
-        .tree-view a {
-            color: #000080;
-            text-decoration: underline;
-        }
-        
-        .tree-view a:hover {
-            color: #800080;
-        }
-        
-        .back-to-top {
-            text-align: center;
-            margin: 30px 0 20px 0;
-        }
-        
-        .guestbook-container {
-            margin-top: 30px;
-        }
-        
-        .chat-messages {
-            height: 200px;
-            overflow-y: auto;
-            background: white;
-            border: 2px inset #c0c0c0;
-            padding: 10px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-        }
-        
-        .message {
-            margin-bottom: 5px;
-            padding: 2px 0;
-            border-bottom: 1px dotted #ccc;
-        }
-        
-        .message-author {
-            font-weight: bold;
-        }
-        
-        .message-time {
-            color: #666;
-            font-size: 10px;
-        }
-        
-        .ascii-art {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            white-space: pre;
-            margin: 0;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        .archive-section h4 {
-            font-family: Tahoma, 'MS Sans Serif', sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            margin: 10px 0 5px 0;
-            padding: 0;
-            color: #000;
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .resource-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .window .title-bar {
-                font-size: 12px;
-            }
-            
-            .field-row-stacked input,
-            .field-row-stacked textarea,
-            .field-row-stacked button {
-                margin-bottom: 5px;
-            }
-            
-            .ascii-art {
-                font-size: 10px;
-            }
-        }
-        
-        /* Footer blockquote */
-        .footer-quote {
-            text-align: center;
-            max-width: 600px;
-            margin: 40px auto 20px auto;
-        }
-
-        /* Print styles */
-        @media print {
-            .guestbook-container,
-            .field-row-stacked {
-                display: none;
-            }
-        }
+    
     </style>
 </head>
 <body>
@@ -240,29 +69,9 @@
             <div class="window-body">
                 <div class="intro-placeholder">
                     <code class="toc">
-<a href="#labels">1. labels</a><br>
-<a href="#archives">2. archives</a><br>
+<a href="#archives">1. archives</a><br>
+<a href="#gig-calendar">2. gig calendar</a><br />
 <a href="#guestbook">3. guestbook</a></code>
-                </div>
-            </div>
-        </div>
-
-        <!-- Labels -->
-        <div class="window" id="labels">
-            <div class="title-bar">
-                <div class="title-bar-text">labels</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Close"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                <div class="section-content">
-                    <ul class="tree-view">
-                        <li><a href="https://bsdj.bandcamp.com/" target="_blank">bsdj</a></li>
-                        <li><a href="https://www.kittyrecords.net/" target="_blank">kitty records</a></li>
-                        <li><a href="https://www.sorehorse.net/" target="_blank">sore horse</a></li>
-                        <li><a href="https://tactic666.bandcamp.com/" target="_blank">tactic (records)</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -277,19 +86,96 @@
             </div>
             <div class="window-body">
                 <menu role="tablist">
-                    <button aria-selected="true" aria-controls="bands">bands</button>
-                    <button aria-controls="video-audio">video/audio</button>
+                    <button aria-selected="true" aria-controls="labels">labels</button>
+                    <button aria-controls="bands">bands</button>
                     <button aria-controls="venues">venues</button>
+                    <button aria-controls="video-audio">video/audio</button>
                     <button aria-controls="playlists">playlists/radio</button>
                     <button aria-controls="links">links</button>
                 </menu>
-                
-                <article role="tabpanel" id="bands">
-                    <p>here is a list of australian screamo and adjacent bands that are being collaboratively catalogued. this is a work in progress and will open it up soon for everyone to work on and add stuff we've missed.</p>
-                    <ul class="tree-view">
-                        <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRJQcCBRIyvqUrH0jmWHEh_xiFB3Bz8JNMCgJZ2l13xsz1AP2RDfk0S7xPW8XyArB2cR-Yf2pSwNfeI/pubhtml" target="_blank">australian screamo bands spreadsheet</a></li>
-                    </ul>
+
+                <article role="tabpanel" id="labels">
+                    <div class="section-content" id="labels-content">
+
+                    </div>
+                    <script src="labels.js"></script>
                 </article>
+
+                 <article role="tabpanel" hidden id="bands">
+                        <p>
+                            here is a list of australian screamo and adjacent
+                            bands that are being collaboratively catalogued.
+                            this is a work in progress and will open it up soon
+                            for everyone to work on and add stuff we've missed.
+                        </p>
+                        <ul class="tree-view" margin="5px">
+                            <li>
+                                <a
+                                    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRJQcCBRIyvqUrH0jmWHEh_xiFB3Bz8JNMCgJZ2l13xsz1AP2RDfk0S7xPW8XyArB2cR-Yf2pSwNfeI/pubhtml"
+                                    target="_blank"
+                                    >australian screamo bands spreadsheet</a
+                                >
+                            </li>
+                        </ul>
+                        <div class="artist-filters" style="margin: 10px 0;">
+                            <div class="filter-group">
+                                <label for="alphabet-selector" style="font-size: 11px;">letter:</label>
+                                <select name="alphabet" id="alphabet-selector" class="dropdown-margin">
+                                    <option ></option>
+                                    <option >#</option>
+                                    <option >a</option>
+                                    <option >b</option>
+                                    <option >c</option>
+                                    <option >d</option>
+                                    <option >e</option>
+                                    <option >f</option>
+                                    <option >g</option>
+                                    <option >h</option>
+                                    <option >i</option>
+                                    <option >j</option>
+                                    <option >k</option>
+                                    <option >l</option>
+                                    <option >m</option>
+                                    <option >n</option>
+                                    <option >o</option>
+                                    <option >p</option>
+                                    <option >q</option>
+                                    <option >r</option>
+                                    <option >s</option>
+                                    <option >t</option>
+                                    <option >u</option>
+                                    <option >v</option>
+                                    <option >w</option>
+                                    <option >x</option>
+                                    <option >y</option>
+                                    <option >z</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="location-selector" style="font-size: 11px;">city:</label>
+                                <select name="location" id="location-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="artist-status-selector" style="font-size: 11px;">status:</label>
+                                <select name="status" id="artist-status-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="genre-selector" style="font-size: 11px;">genre:</label>
+                                <select name="genre" id="genre-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span style="font-size: 11px;">view: </span>
+                            <a href="#" id="view-toggle" onclick="toggleArtistView(); return false;" style="font-size: 11px;">switch to compact</a>
+                        </div>
+                        <script src="artists.js"></script>
+                        <div class="artist-names" id="artist-names">
+                             <!-- Messages will be loaded from database -->
+                        </div>
+                    </article>
 
                 <article role="tabpanel" hidden id="video-audio" class="archive-section">
                     <h4>video archives</h4>
@@ -306,10 +192,30 @@
                 </article>
 
                 <article role="tabpanel" hidden id="venues">
-                    <ul class="tree-view">
-                        <li>&lt;to be added&gt;</li>
-                    </ul>
-                </article>
+                        <select name="city" id="city-selector">
+                            <option value="sydney">sydney</option>
+                            <option value="brisbane">brisbane</option>
+                            <option value="adelaide">adelaide</option>
+                            <option value="melbourne">melbourne</option>
+                            <option value="canberra">canberra</option>
+                            <option value="perth">perth</option>
+                            <option value="wollongong">wollongong</option>
+                            <option value="nambour">nambour</option>
+                            <option value="newcastle">newcastle</option>
+                        </select>
+                        <select name="active" id="status-selector">
+                            <option value=""></option>
+                            <option value="active">active</option>
+                            <option value="inactive">inactive</option>
+                            <option value="closed">closed</option>
+                            <option value="moved">moved</option>
+                            <option value="unknown">unknown</option>
+                        </select>
+                        <script src="venues.js"></script>
+                        <div class="venue-names" id="venue-names">
+                                     <!-- Messages will be loaded from database -->
+                        </div>
+                    </article>
 
                 <article role="tabpanel" hidden id="playlists" class="archive-section">
                     <h4>playlists</h4>
@@ -475,6 +381,49 @@
             </div>
         </div>
 
+<!---GIG CALENDAR-->
+            <div class="window" id="gig-calendar">
+                <div class="title-bar">
+                    <div class="title-bar-text">gig calendar</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="section-content">
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <button id="prev-month">‹</button>
+                                <div id="month-year"></div>
+                                <button id="next-month">›</button>
+                            </div>
+                            <div class="calendar-body">
+                                <div class="calendar-weekdays">
+                                  <div>Sun</div>
+                                  <div>Mon</div>
+                                  <div>Tue</div>
+                                  <div>Wed</div>
+                                  <div>Thu</div>
+                                  <div>Fri</div>
+                                  <div>Sat</div>
+                                </div>
+                                <div class="calendar-dates">
+                                    <!-- Dates will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calendar-legend">
+                            <span><strong style="color: #ff0000;">●</strong> = Gig scheduled</span>
+                            <span><strong style="color: #0054e3;">●</strong> = Selected date</span>
+                        </div>
+                        <script src="calendar.js"></script>
+                    </div>
+                    <div class="gig-events" id="gig-events">
+                                     <!-- Messages will be loaded from database -->
+                    </div>
+                </div>
+            </div>
+        
         <!-- Guestbook/Chat -->
         <div class="window guestbook-container" id="guestbook">
             <div class="title-bar">
@@ -518,7 +467,7 @@
         <!-- Footer acknowledgement -->
         <blockquote class="footer-quote">
             sovereignty was never ceded. always was, always will be aboriginal land.
-                <br><a href="/about">credits/about</a>
+                <br><a href="/about.html">credits/about</a>
         </blockquote>
     </div>
 

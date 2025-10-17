@@ -1,0 +1,525 @@
+/* Calendar - XP.css styling */
+.calendar {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border: 2px ridge #dfdfdf;
+  margin: 0;
+}
+
+.calendar-header {
+  background: #0054e3;
+  color: white;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.calendar-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#month-year {
+  font-size: 13px;
+  font-weight: bold;
+  font-family: Tahoma, 'MS Sans Serif', sans-serif;
+}
+
+.calendar-weekdays,
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-weekdays div,
+.calendar-dates div {
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 11px;
+}
+
+.calendar-weekdays {
+  background: #c0c0c0;
+  border-bottom: 2px groove #808080;
+}
+
+.calendar-weekdays div {
+  font-weight: bold;
+  font-family: Tahoma, 'MS Sans Serif', sans-serif;
+}
+
+.calendar-dates div {
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+  background: white;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-dates div:hover {
+  background: #e0e0e0;
+}
+
+/* Today's date */
+.current-date {
+  background: #fffbf0 !important;
+  font-weight: bold;
+  border: 2px solid #808080 !important;
+}
+
+/* Dates with gigs - red background */
+.has-gig {
+  background-color: #ff0000 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Selected date - blue highlight */
+.selected-date {
+  background: #0054e3 !important;
+  color: white !important;
+  font-weight: bold;
+  border: 2px solid #000080 !important;
+}
+table, th, td {
+  border: 2px solid black;
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+.social-icon {
+margin: 5px;
+}
+.dropdown-margin {
+  margin: 5px;
+}
+body {
+       margin: 0;
+       padding: 20px;
+       font-family: Tahoma, 'MS Sans Serif', sans-serif;
+       background: #c0c0c0;
+       min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #c0c0c0;
+}
+
+.window {
+    margin-bottom: 20px;
+}
+
+.section-content {
+    padding: 15px;
+}
+
+.directory-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.directory-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #808080;
+}
+
+.directory-list li:last-child {
+    border-bottom: none;
+}
+
+.directory-link {
+    color: #000080;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.directory-link:hover {
+    color: #800080;
+}
+
+.intro-placeholder {
+    background: #000;
+    color: #c0c0c0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 8px;
+    border: 2px inset #c0c0c0;
+}
+
+.toc {
+    margin: 0;
+}
+
+.toc a {
+    color: #00ff00;
+    text-decoration: underline;
+    font-family: "Perfect DOS VGA 437 Win", monospace;
+}
+
+.toc a:hover {
+    color: #00ff7f;
+}
+
+.tree-view {
+    font-family: Tahoma, 'MS Sans Serif', sans-serif;
+}
+
+.tree-view a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.tree-view a:hover {
+    color: #800080;
+}
+
+.back-to-top {
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
+
+.guestbook-container {
+    margin-top: 30px;
+}
+
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    background: white;
+    border: 2px inset #c0c0c0;
+    padding: 10px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.message {
+    margin-bottom: 5px;
+    padding: 2px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.message-author {
+    font-weight: bold;
+}
+
+.message-time {
+    color: #666;
+    font-size: 10px;
+}
+
+.ascii-art {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    white-space: pre;
+    margin: 0;
+    padding: 15px;
+    text-align: left;
+}
+
+.archive-section h4 {
+    font-family: Tahoma, 'MS Sans Serif', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    padding: 0;
+    color: #000;
+}
+
+/* Tab menu styling fixes */
+menu[role="tablist"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 2px;
+}
+
+menu[role="tablist"] button {
+    flex-shrink: 1;
+    min-width: fit-content;
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .window .title-bar {
+        font-size: 12px;
+    }
+
+    .field-row-stacked input,
+    .field-row-stacked textarea,
+    .field-row-stacked button {
+        margin-bottom: 5px;
+    }
+
+    .ascii-art {
+        font-size: 10px;
+    }
+
+    /* Make tabs wrap properly on mobile */
+    menu[role="tablist"] {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    menu[role="tablist"] button {
+        font-size: 10px;
+        padding: 3px 6px;
+        flex: 0 1 auto;
+    }
+
+    /* Artist filter labels and dropdowns on mobile */
+    .artist-filters {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .artist-filters .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .artist-filters label {
+        min-width: 50px;
+        font-size: 10px !important;
+    }
+
+    .artist-filters select {
+        flex: 1;
+        font-size: 10px;
+    }
+}
+
+/* Footer blockquote */
+.footer-quote {
+    text-align: center;
+    max-width: 600px;
+    margin: 40px auto 20px auto;
+}
+
+/* Artist, Venue, and Gig cards - shared styling */
+.artist-card,
+.venue-card,
+.gig-card {
+    background: white;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 2px groove #dfdfdf;
+}
+
+.artist-card h4,
+.venue-card h4,
+.gig-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #000080;
+}
+
+.artist-card p,
+.venue-card p,
+.gig-card p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+.artist-card .social-links,
+.venue-card .venue-links,
+.gig-card .gig-links {
+    margin: 8px 0;
+}
+
+.venue-card .venue-links a,
+.gig-card .gig-links a {
+    color: #000080;
+    text-decoration: underline;
+    font-size: 11px;
+}
+
+.venue-card .venue-links a:hover,
+.gig-card .gig-links a:hover {
+    color: #800080;
+}
+
+.artist-card .lore-note,
+.venue-card .lore-note {
+    margin-top: 8px;
+    padding: 6px;
+    background: #fffbf0;
+    border-left: 3px solid #808080;
+    font-size: 11px;
+    font-style: italic;
+}
+
+/* Calendar legend */
+.calendar-legend {
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 10px;
+    text-align: center;
+    background: #f0f0f0;
+    border: 1px solid #c0c0c0;
+}
+
+.calendar-legend span {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+/* Pagination controls */
+.pagination-controls {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.pagination-controls p {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.pagination-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.pagination-buttons button {
+    min-width: 75px;
+}
+
+.pagination-buttons span {
+    font-size: 11px;
+    padding: 0 10px;
+}
+
+/* Responsive design for artist, venue, and gig cards */
+@media (max-width: 768px) {
+    .artist-card,
+    .venue-card,
+    .gig-card {
+        padding: 10px;
+    }
+
+    .artist-card h4,
+    .venue-card h4,
+    .gig-card h4 {
+        font-size: 13px;
+    }
+
+    .artist-card p,
+    .venue-card p,
+    .gig-card p {
+        font-size: 10px;
+    }
+
+    .calendar {
+        max-width: 100%;
+    }
+
+    .calendar-weekdays div,
+    .calendar-dates div {
+        padding: 6px 2px;
+        font-size: 10px;
+    }
+
+    /* Make compact table scrollable on mobile */
+    .artist-table {
+        font-size: 10px;
+        display: block;
+        overflow-x: auto;
+    }
+
+    .artist-table thead,
+    .artist-table tbody {
+        display: table;
+        width: 100%;
+    }
+
+    .artist-table th,
+    .artist-table td {
+        padding: 4px 6px;
+    }
+
+    .social-icon-small {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Compact artist table styling */
+.artist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    background: white;
+    font-size: 11px;
+}
+
+.artist-table thead {
+    background: #0054e3;
+    color: white;
+}
+
+.artist-table th {
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: bold;
+    border: 1px solid #808080;
+}
+
+.artist-table td {
+    padding: 6px 8px;
+    border: 1px solid #c0c0c0;
+    vertical-align: middle;
+}
+
+.artist-table tbody tr:nth-child(even) {
+    background: #f0f0f0;
+}
+
+.artist-table tbody tr:hover {
+    background: #e0e0e0;
+}
+
+.social-icon-small {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+/* Print styles */
+@media print {
+    .guestbook-container,
+    .field-row-stacked {
+        display: none;
+    }
+}
