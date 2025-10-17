@@ -10,7 +10,8 @@ const SHEET_GIDS = {
   'labels': '2047005466',
   'gig calendar': '300002002',
   'interviews': '877331143',
-  'live sets': '489360706'
+  'live sets': '489360706',
+  'featured': '179753337'
 };
 
 // Cache duration in milliseconds (5 minutes)

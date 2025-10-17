@@ -76,6 +76,63 @@
             </div>
         </div>
 
+<!---FEATURED TAB-->
+            <div class="window" id="featured-tab">
+                <div class="title-bar">
+                    <div class="title-bar-text">featured</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                        <p>
+                            aus skramz directory is made from volunteers who have nothing but love for the scene. because of this, some of us would
+                            like to highlight some of our personal favourite items from the community. we will do our best to regularly update this section
+                            and rotate artists/community members/etc to properly highlight the diversity of the scene.
+                        </p>
+                    <div class="featured-events" id="featured-events">
+                                     <!-- Messages will be loaded from database -->
+                     <menu role="tablist" id="featured-tabs">
+                    <button aria-selected="true" aria-controls="featured-releases">releases</button>
+                    <button aria-controls="featured-venues">venues</button>
+                    <button aria-controls="featured-live-sets">live set</button>
+                    <button aria-controls="featured-interviews">interviews</button>
+                    <button aria-controls="featured-gigs">upcoming gigs</button>
+                </menu>
+                <article role="tabpanel" id="featured-releases">
+                    <div class="section-content" id="featured-releases-content">
+
+                    </div>
+                    <script type="module" src="featured-releases.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-venues">
+                    <div class="section-content" id="featured-venues-content">
+
+                    </div>
+                    <script type="module" hidden src="featured-venues.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-live-sets">
+                    <div class="section-content" id="featured-live-sets-content">
+
+                    </div>
+                    <script type="module" hidden src="featured-live-sets.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-interviews">
+                    <div class="section-content" id="featured-interviews-content">
+
+                    </div>
+                    <script type="module" src="featured-interviews.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-gigs">
+                    <div class="section-content" id="featured-gigs-content">
+
+                    </div>
+                    <script type="module" src="featured-gigs.js"></script>
+               </article>
+                    </div>
+                </div>
+            </div>
+
         <!-- Archives -->
         <div class="window" id="archives">
             <div class="title-bar">
@@ -85,7 +142,7 @@
                 </div>
             </div>
             <div class="window-body">
-                <menu role="tablist">
+                <menu role="tablist" id="archive-tabs">
                     <button aria-selected="true" aria-controls="labels">labels</button>
                     <button aria-controls="bands">bands</button>
                     <button aria-controls="venues">venues</button>
@@ -644,8 +701,8 @@
             loadMessages();
 
             // Tab functionality
-            const tabButtons = document.querySelectorAll('menu[role="tablist"] button');
-            const tabPanels = document.querySelectorAll('article[role="tabpanel"]');
+            const tabButtons = document.querySelectorAll('menu[id="archive-tabs"] button');
+            const tabPanels = document.querySelectorAll('div[id="archives"] div[class="window-body"] article[role="tabpanel"]');
 
             tabButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -663,6 +720,29 @@
                     }
                 });
             });
+
+                        // Tab functionality
+            const featuredTabButtons = document.querySelectorAll('menu[id="featured-tabs"] button');
+            const featuredTabPanels = document.querySelectorAll('div[id="featured-tab"] div[class="window-body"] article[role="tabpanel"]');
+
+            featuredTabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove aria-selected from all buttons
+                    featuredTabButtons.forEach(btn => btn.removeAttribute('aria-selected'));
+                    // Add aria-selected to clicked button
+                    this.setAttribute('aria-selected', 'true');
+
+                    // Hide all panels
+                    featuredTabPanels.forEach(panel => panel.setAttribute('hidden', ''));
+                    // Show target panel
+                    const targetPanel = document.getElementById(this.getAttribute('aria-controls'));
+                    if (targetPanel) {
+                        targetPanel.removeAttribute('hidden');
+                    }
+                });
+            });
+
+
         });
     </script>
 </body>
