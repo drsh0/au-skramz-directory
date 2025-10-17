@@ -1,0 +1,31 @@
+# Environment variables (just in case)
+.env
+.env.local
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.bak
+
+# Old credentials file (no longer needed - using public sheets)
+config.js
+
+# Documentation files
+CLAUDE.md
+DEPLOYMENT.md
+LOCAL_DEVELOPMENT.md
