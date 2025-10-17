@@ -91,6 +91,7 @@
                     <button aria-controls="venues">venues</button>
                     <button aria-controls="video-audio">video/audio</button>
                     <button aria-controls="playlists">playlists/radio</button>
+                    <button aria-controls="interviews">interviews</button>
                     <button aria-controls="links">links</button>
                 </menu>
 
@@ -171,7 +172,7 @@
                             <span style="font-size: 11px;">view: </span>
                             <a href="#" id="view-toggle" onclick="toggleArtistView(); return false;" style="font-size: 11px;">switch to compact</a>
                         </div>
-                        <script src="artists.js"></script>
+                        <script type="module" src="artists.js"></script>
                         <div class="artist-names" id="artist-names">
                              <!-- Messages will be loaded from database -->
                         </div>
@@ -366,6 +367,17 @@
                         </li>
                     </ul>
                 </article>
+
+                <article role="tabpanel" hidden id="interviews">
+                        <div class="filter-group">
+                            <label for="interviewer-selector" style="font-size: 11px;">interviewer:</label>
+                            <select name="interviewer" id="interviewer-selector" class="dropdown-margin"><option ></option></select>
+                        </div>
+                        <script type="module" src="interviews.js"></script>
+                        <div class="interview-names" id="interview-names">
+                            <!-- Messages will be loaded from database -->
+                        </div>
+                    </article>
 
                 <article role="tabpanel" hidden id="links" class="archive-section">
                     <h4>discord servers</h4>

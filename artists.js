@@ -1,3 +1,5 @@
+import {itemsPerPage} from '/consts.js'
+
 const alphabetDropdown = document.getElementById('alphabet-selector');
 const locationDropdown = document.getElementById('location-selector');
 const artistStatusDropdown = document.getElementById('artist-status-selector');
@@ -5,7 +7,6 @@ const genreDropdown = document.getElementById('genre-selector');
 
 let artistAPIData = "";
 let currentPage = 1;
-const itemsPerPage = 10;
 let viewMode = 'cards'; // 'cards' or 'compact'
 
 HTMLSelectElement.prototype.contains = function( value ) {
