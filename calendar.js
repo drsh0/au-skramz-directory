@@ -8,30 +8,43 @@ let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 
 let gigAPIData = "";
+let selectedDate = null;
 
-function getGoogleApiKey() {
-  return "";
-}
-
-function getGoogleSheetsID() {
-  return "";
-}
-
-window.onload = function(){
-    var apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${getGoogleSheetsID()}/values/gig%20calendar?key=${getGoogleApiKey()}`;
-    fetch(apiUrl).then(response => {
-        return response.json();
-    }).then(data => {
+async function loadCalendarData() {
+    try {
+        const data = await fetchSheetData('gig calendar');
         gigAPIData = data;
-    }).catch(err => {
-      // Do something for an error here
-    });
+        // Re-render calendar after data is loaded to show gig highlighting
+        renderCalendar(currentMonth, currentYear);
+    } catch (err) {
+        console.error('Failed to load gig calendar:', err);
+    }
+}
+
+// Wait for DOM to be ready before loading calendar
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadCalendarData);
+} else {
+    // DOM is already ready
+    loadCalendarData();
 }
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
+
+// Check if a date has gigs scheduled
+function hasGigOnDate(day, month, year) {
+  if (!gigAPIData || !gigAPIData.values) return false;
+
+  const dateString = `${String(day).padStart(2, '0')}/${String(month + 1).padStart(2, '0')}/${year}`;
+  const headers = gigAPIData.values[0];
+  const dateIndex = headers.indexOf('Date');
+  const gigRows = gigAPIData.values.slice(1);
+
+  return gigRows.some(row => row[dateIndex] === dateString);
+}
 
 function renderCalendar(month, year) {
   calendarDates.innerHTML = '';
@@ -43,6 +56,9 @@ function renderCalendar(month, year) {
   // Get the number of days in the month
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+  // Get today's date
+  const today = new Date();
+
   // Create blanks for days of the week before the first day
   for (let i = 0; i < firstDay; i++) {
     const blank = document.createElement('div');
@@ -53,42 +69,42 @@ function renderCalendar(month, year) {
   for (let i = 1; i <= daysInMonth; i++) {
     const day = document.createElement('div');
     day.textContent = i;
-    calendarDates.appendChild(day);
-  }
-  // Get today's date
-  const today = new Date();
-
-  // Populate the days
-  for (let i = 1; i <= daysInMonth; i++) {
-    const day = document.createElement('div');
-    day.textContent = i;
+    day.dataset.day = i;
 
     // Highlight today's date
-    //if (
-   //   i === today.getDate() &&
-    //  year === today.getFullYear() &&
-    //  month === today.getMonth()
-    //) {
-   //   day.classList.add('current-date');
-   // }
+    if (
+      i === today.getDate() &&
+      year === today.getFullYear() &&
+      month === today.getMonth()
+    ) {
+      day.classList.add('current-date');
+    }
 
-   // calendarDates.appendChild(day);
+    // Highlight dates with gigs
+    if (hasGigOnDate(i, month, year)) {
+      day.classList.add('has-gig');
+    }
+
+    // Highlight selected date
+    if (selectedDate &&
+        selectedDate.day === i &&
+        selectedDate.month === month &&
+        selectedDate.year === year) {
+      day.classList.add('selected-date');
+    }
+
+    calendarDates.appendChild(day);
   }
-  if (gigAPIData != null && gigAPIData != "")
-  {
-    var monthString = `${today.getMonth()+1}`
-    if (monthString.length == 1){
-        monthString = "0" + monthString;
-    }
-    var dayString = `${today.getDate()}`
-    if (dayString.length == 1){
-        dayString = "0" + dayString;
-    }
-    displayGigsInHTML(`${dayString}/${monthString}/${currentYear}`,"gig-events",gigAPIData); // Find gigs on specific date
-}
+
+  // Show today's gigs on initial load if no date is selected
+  if (gigAPIData != null && gigAPIData != "" && !selectedDate) {
+    const monthString = String(today.getMonth() + 1).padStart(2, '0');
+    const dayString = String(today.getDate()).padStart(2, '0');
+    displayGigsInHTML(`${dayString}/${monthString}/${today.getFullYear()}`, "gig-events", gigAPIData);
+  }
 }
 
-renderCalendar(currentMonth, currentYear);
+// Calendar will be rendered after data loads in loadCalendarData()
 
 prevMonthBtn.addEventListener('click', () => {
   currentMonth--;
@@ -109,20 +125,26 @@ nextMonthBtn.addEventListener('click', () => {
 });
 
 calendarDates.addEventListener('click', (e) => {
-  if (e.target.textContent !== '') {
-      if (gigAPIData != null && gigAPIData != "")
-  {
-    var monthString = `${currentMonth+1}`
-    if (monthString.length == 1){
-        monthString = "0" + monthString;
+  if (e.target.textContent !== '' && e.target.dataset.day) {
+    const day = parseInt(e.target.dataset.day);
+
+    // Update selected date
+    selectedDate = {
+      day: day,
+      month: currentMonth,
+      year: currentYear
+    };
+
+    // Re-render calendar to show selection
+    renderCalendar(currentMonth, currentYear);
+
+    // Display gigs for selected date
+    if (gigAPIData != null && gigAPIData != "") {
+      const monthString = String(currentMonth + 1).padStart(2, '0');
+      const dayString = String(day).padStart(2, '0');
+      displayGigsInHTML(`${dayString}/${monthString}/${currentYear}`, "gig-events", gigAPIData);
     }
-    var dayString = `${e.target.textContent}`
-    if (dayString.length == 1){
-        dayString = "0" + dayString;
-    }
-    displayGigsInHTML(`${dayString}/${monthString}/${currentYear}`,"gig-events",gigAPIData); // Find gigs on specific date
   }
-}
 });
 
 // Function to parse and display gigs based on date matching
@@ -159,27 +181,45 @@ function filterAndDisplayGigs(dateString, gigData) {
 function displayGigsInHTML(dateString, containerId, gigData) {
   const headers = gigData.values[0];
   const gigRows = gigData.values.slice(1);
-  const dateColumnIndex = headers.indexOf('Date');
-  
-  const matchingGigs = gigRows.filter(row => row[dateColumnIndex] === dateString);
+
+  // Get column indices
+  const headlinerIndex = headers.indexOf('Headliner');
+  const supportsIndex = headers.indexOf('Supports');
+  const cityIndex = headers.indexOf('City');
+  const venueIndex = headers.indexOf('Venue');
+  const dateIndex = headers.indexOf('Date');
+  const linkIndex = headers.indexOf('info link');
+
+  const matchingGigs = gigRows.filter(row => row[dateIndex] === dateString);
   const container = document.getElementById(containerId);
-  
+
   if (matchingGigs.length > 0) {
     let html = `<h3>Gigs on ${dateString}</h3>`;
     matchingGigs.forEach(gig => {
-      html += `
-        <div class="gig-card">
-          <h4>${gig[0]}</h4> <!-- Headliner -->
-          <p><strong>Supports:</strong> ${gig[1] || 'None'}</p>
-          <p><strong>Venue:</strong> ${gig[3]}, ${gig[2]}</p>
-          <p><strong>Date:</strong> ${gig[4]}</p>
-          ${gig[5] ? `<a href="${gig[5]}" target="_blank">More Info</a>` : ''}
-        </div>
-      `;
+      html += '<div class="gig-card sunken-panel">';
+      html += `<h4>${gig[headlinerIndex] || 'Unknown Headliner'}</h4>`;
+
+      if (gig[supportsIndex]) {
+        html += `<p><strong>Supports:</strong> ${gig[supportsIndex]}</p>`;
+      }
+
+      if (gig[venueIndex] || gig[cityIndex]) {
+        html += `<p><strong>Venue:</strong> ${gig[venueIndex] || ''} ${gig[cityIndex] ? ', ' + gig[cityIndex] : ''}</p>`;
+      }
+
+      if (gig[dateIndex]) {
+        html += `<p><strong>Date:</strong> ${gig[dateIndex]}</p>`;
+      }
+
+      if (gig[linkIndex]) {
+        html += `<div class="gig-links"><a href="${gig[linkIndex]}" target="_blank">🔗 More Info</a></div>`;
+      }
+
+      html += '</div>';
     });
     container.innerHTML = html;
   } else {
-    container.innerHTML = `<p>No gigs found for ${dateString}</p>`;
+    container.innerHTML = `<p>No gigs found for ${dateString}.</p>`;
   }
 }
 

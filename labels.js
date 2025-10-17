@@ -1,27 +1,19 @@
-function getGoogleApiKey() {
-  return "";
-}
-
-function getGoogleSheetsID() {
-  return "";
-}
-
-function renderLabels()
+async function renderLabels()
 {
-    console.log("TESTING");
-    var apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${getGoogleSheetsID()}/values/labels?key=${getGoogleApiKey()}`;
-    fetch(apiUrl).then(response => {
-        return response.json();
-    }).then(data => {
+    try {
+        const data = await fetchSheetData('labels');
         displayLabelsInHTML('labels-content', data);
-    }).catch(err => {
-      // Do something for an error here
-    });
+    } catch (err) {
+        console.error('Failed to load labels:', err);
+    }
 }
 
-renderLabels()
-
-window.onload = function(){
+// Wait for DOM to be ready before rendering
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderLabels);
+} else {
+    // DOM is already ready
+    renderLabels();
 }
 
 function displayLabelsInHTML(containerId, labelData) {

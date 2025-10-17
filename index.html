@@ -27,7 +27,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>">
     <link rel="manifest" href="data:application/json,{&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f0f0f0'/><text x='50' y='60' font-size='60' text-anchor='middle'>🧸</text></svg>&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
     <meta name="theme-color" content="#c0c0c0">
-    
+
+    <!-- Sheets utility functions -->
+    <script src="sheets-utils.js"></script>
+
     <!-- XP.css from CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xp.css@0.2.3/dist/XP.css">
 
@@ -66,27 +69,10 @@
             <div class="window-body">
                 <div class="intro-placeholder">
                     <code class="toc">
-<a href="#labels">1. labels</a><br>
-<a href="#archives">2. archives</a><br>
-<a href="#gig-calendar">3. gig calendar</a><br />
-<a href="#guestbook">4. guestbook</a></code>
+<a href="#archives">1. archives</a><br>
+<a href="#gig-calendar">2. gig calendar</a><br />
+<a href="#guestbook">3. guestbook</a></code>
                 </div>
-            </div>
-        </div>
-
-        <!-- Labels -->
-        <div class="window" id="labels">
-            <div class="title-bar">
-                <div class="title-bar-text">labels</div>
-                <div class="title-bar-controls">
-                    <button aria-label="Close"></button>
-                </div>
-            </div>
-            <div class="window-body">
-                    <div class="section-content" id="labels-content">
-
-                    </div>
-                    <script src="labels.js"></script>
             </div>
         </div>
 
@@ -100,14 +86,22 @@
             </div>
             <div class="window-body">
                 <menu role="tablist">
-                    <button aria-selected="true" aria-controls="bands">bands</button>
-                    <button aria-controls="video-audio">video/audio</button>
+                    <button aria-selected="true" aria-controls="labels">labels</button>
+                    <button aria-controls="bands">bands</button>
                     <button aria-controls="venues">venues</button>
+                    <button aria-controls="video-audio">video/audio</button>
                     <button aria-controls="playlists">playlists/radio</button>
                     <button aria-controls="links">links</button>
                 </menu>
-                
-                 <article role="tabpanel" id="bands">
+
+                <article role="tabpanel" id="labels">
+                    <div class="section-content" id="labels-content">
+
+                    </div>
+                    <script src="labels.js"></script>
+                </article>
+
+                 <article role="tabpanel" hidden id="bands">
                         <p>
                             here is a list of australian screamo and adjacent
                             bands that are being collaboratively catalogued.
@@ -123,39 +117,60 @@
                                 >
                             </li>
                         </ul>
-                        <select name="alphabet" id="alphabet-selector" class="dropdown-margin">
-                            <option ></option>
-                            <option >#</option>
-                            <option >a</option>
-                            <option >b</option>
-                            <option >c</option>
-                            <option >d</option>
-                            <option >e</option>
-                            <option >f</option>
-                            <option >g</option>
-                            <option >h</option>
-                            <option >i</option>
-                            <option >j</option>
-                            <option >k</option>
-                            <option >l</option>
-                            <option >m</option>
-                            <option >n</option>
-                            <option >o</option>
-                            <option >p</option>
-                            <option >q</option>
-                            <option >r</option>
-                            <option >s</option>
-                            <option >t</option>
-                            <option >u</option>
-                            <option >v</option>
-                            <option >w</option>
-                            <option >x</option>
-                            <option >y</option>
-                            <option >z</option>
-                        </select>
-                        <select name="location" id="location-selector" class="dropdown-margin"><option ></option></select>
-                        <select name="status" id="artist-status-selector" class="dropdown-margin"><option ></option></select>
-                        <select name="genre" id="genre-selector" class="dropdown-margin"><option ></option></select>
+                        <div class="artist-filters" style="margin: 10px 0;">
+                            <div class="filter-group">
+                                <label for="alphabet-selector" style="font-size: 11px;">letter:</label>
+                                <select name="alphabet" id="alphabet-selector" class="dropdown-margin">
+                                    <option ></option>
+                                    <option >#</option>
+                                    <option >a</option>
+                                    <option >b</option>
+                                    <option >c</option>
+                                    <option >d</option>
+                                    <option >e</option>
+                                    <option >f</option>
+                                    <option >g</option>
+                                    <option >h</option>
+                                    <option >i</option>
+                                    <option >j</option>
+                                    <option >k</option>
+                                    <option >l</option>
+                                    <option >m</option>
+                                    <option >n</option>
+                                    <option >o</option>
+                                    <option >p</option>
+                                    <option >q</option>
+                                    <option >r</option>
+                                    <option >s</option>
+                                    <option >t</option>
+                                    <option >u</option>
+                                    <option >v</option>
+                                    <option >w</option>
+                                    <option >x</option>
+                                    <option >y</option>
+                                    <option >z</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="location-selector" style="font-size: 11px;">city:</label>
+                                <select name="location" id="location-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="artist-status-selector" style="font-size: 11px;">status:</label>
+                                <select name="status" id="artist-status-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="genre-selector" style="font-size: 11px;">genre:</label>
+                                <select name="genre" id="genre-selector" class="dropdown-margin"><option ></option></select>
+                            </div>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <span style="font-size: 11px;">view: </span>
+                            <a href="#" id="view-toggle" onclick="toggleArtistView(); return false;" style="font-size: 11px;">switch to compact</a>
+                        </div>
                         <script src="artists.js"></script>
                         <div class="artist-names" id="artist-names">
                              <!-- Messages will be loaded from database -->
@@ -397,6 +412,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="calendar-legend">
+                            <span><strong style="color: #ff0000;">●</strong> = Gig scheduled</span>
+                            <span><strong style="color: #0054e3;">●</strong> = Selected date</span>
+                        </div>
                         <script src="calendar.js"></script>
                     </div>
                     <div class="gig-events" id="gig-events">
@@ -419,7 +438,11 @@
                 <div class="chat-messages" id="chatMessages">
                     <!-- Messages will be loaded from database -->
                 </div>
-                
+
+                <div class="field-row-stacked" style="text-align: center;">
+                    <button id="loadMoreBtn" onclick="loadMoreMessages()">load more messages</button>
+                </div>
+
                 <div class="field-row-stacked">
                     <label for="nameInput">name:</label>
                     <input type="text" id="nameInput" placeholder="your name..." maxlength="20">
@@ -443,21 +466,38 @@
 
         <!-- Footer acknowledgement -->
         <blockquote class="footer-quote">
-            sovereignty never ceded. always was, always will be aboriginal land.
+            sovereignty was never ceded. always was, always will be aboriginal land.
+                <br><a href="/about.html">credits/about</a>
         </blockquote>
     </div>
 
     <script>
         const API_BASE = 'https://guestbook-api.measures-jugging.workers.dev'; // Replace with your worker URL
-        
-       async function loadMessages() {
+        let oldestMessageId = null;
+        let hasMoreMessages = true;
+
+       async function loadMessages(append = false) {
             try {
-                const response = await fetch(`${API_BASE}/api/messages`);
+                const url = append && oldestMessageId
+                    ? `${API_BASE}/api/messages?before=${oldestMessageId}`
+                    : `${API_BASE}/api/messages`;
+
+                const response = await fetch(url);
                 const messages = await response.json();
-                
+
                 const chatMessages = document.getElementById('chatMessages');
-                chatMessages.innerHTML = '';
-                
+
+                if (!append) {
+                    chatMessages.innerHTML = '';
+                    oldestMessageId = null;
+                }
+
+                if (messages.length === 0) {
+                    hasMoreMessages = false;
+                    updateLoadMoreButton();
+                    return;
+                }
+
                 messages.forEach(msg => {
                     // Convert UTC to Australian Eastern time
                     const utcDate = new Date(msg.timestamp + 'Z'); // Add Z to ensure UTC interpretation
@@ -470,7 +510,7 @@
                         minute: '2-digit',
                         hour12: false
                     });
-                    
+
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message';
                     const nameColor = getColorForName(msg.name);
@@ -480,11 +520,35 @@
                         ${escapeHtml(msg.message)}
                     `;
                     chatMessages.appendChild(messageDiv);
+
+                    // Track the oldest message ID for pagination
+                    oldestMessageId = msg.id;
                 });
-                
+
+                // Check if we got fewer messages than the page limit (30)
+                hasMoreMessages = messages.length === 30;
+                updateLoadMoreButton();
+
                 // chatMessages.scrollTop = chatMessages.scrollHeight;
             } catch (error) {
                 console.error('Failed to load messages:', error);
+            }
+        }
+
+        async function loadMoreMessages() {
+            await loadMessages(true);
+        }
+
+        function updateLoadMoreButton() {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                if (hasMoreMessages) {
+                    loadMoreBtn.disabled = false;
+                    loadMoreBtn.textContent = 'load more messages';
+                } else {
+                    loadMoreBtn.disabled = true;
+                    loadMoreBtn.textContent = 'no more messages';
+                }
             }
         }
         
