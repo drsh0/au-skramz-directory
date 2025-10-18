@@ -69,9 +69,10 @@
             <div class="window-body">
                 <div class="intro-placeholder">
                     <code class="toc">
-<a href="#archives">1. archives</a><br>
-<a href="#gig-calendar">2. gig calendar</a><br />
-<a href="#guestbook">3. guestbook</a></code>
+<a href="#featured-tab">1. featured</a><br>
+<a href="#archives">2. archives</a><br />
+<a href="#gig-calendar">3. gig calendar</a><br />
+<a href="#guestbook">4. guestbook</a></code>
                 </div>
             </div>
         </div>
@@ -85,11 +86,17 @@
                     </div>
                 </div>
                 <div class="window-body">
-                        <p>
-                            aus skramz directory is made from volunteers who have nothing but love for the scene. because of this, some of us would
-                            like to highlight some of our personal favourite items from the community. we will do our best to regularly update this section
-                            and rotate artists/community members/etc to properly highlight the diversity of the scene.
-                        </p>
+                    <div class="intro-placeholder">
+                        <code class="featcode">
+                            >aus skramz directory is made from volunteers who have nothing but love for the scene.
+                        </code><br />
+                        <code class="featcode">
+                            >because of this, some of us would like to highlight some of our personal favourite items from the community.
+                        </code><br />
+                        <code class="featcode">
+                            >we will do our best to regularly update this section and rotate artists/community members/etc to properly highlight the diversity of the scene.
+                        </code>
+                    </div>
                     <div class="featured-events" id="featured-events">
                                      <!-- Messages will be loaded from database -->
                      <menu role="tablist" id="featured-tabs">
@@ -439,6 +446,37 @@
 
                 <article role="tabpanel" hidden id="live-sets">
                         <div class="filter-group">
+                             <label for="alphabet-live-set-selector" style="font-size: 11px;">letter:</label>
+                                <select name="alphabet" id="alphabet-live-set-selector" class="dropdown-margin">
+                                    <option ></option>
+                                    <option >#</option>
+                                    <option >a</option>
+                                    <option >b</option>
+                                    <option >c</option>
+                                    <option >d</option>
+                                    <option >e</option>
+                                    <option >f</option>
+                                    <option >g</option>
+                                    <option >h</option>
+                                    <option >i</option>
+                                    <option >j</option>
+                                    <option >k</option>
+                                    <option >l</option>
+                                    <option >m</option>
+                                    <option >n</option>
+                                    <option >o</option>
+                                    <option >p</option>
+                                    <option >q</option>
+                                    <option >r</option>
+                                    <option >s</option>
+                                    <option >t</option>
+                                    <option >u</option>
+                                    <option >v</option>
+                                    <option >w</option>
+                                    <option >x</option>
+                                    <option >y</option>
+                                    <option >z</option>
+                                </select>
                         </div>
                         <script type="module" src="live-sets.js"></script>
                         <div class="live-set-names" id="live-set-names">

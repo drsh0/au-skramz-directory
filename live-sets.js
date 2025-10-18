@@ -1,5 +1,7 @@
 import {itemsPerPage} from '/consts.js'
 
+const alphabetDropdown = document.getElementById('alphabet-live-set-selector');
+
 let liveSetAPIData = "";
 let currentLiveSetPage = 1;
 
@@ -32,7 +34,7 @@ async function renderLiveSets()
         const liveSetRows = data.values.slice(1);
         console.log(liveSetRows.length);
         displayLiveSetsInHTML(
-             'live-set-names', liveSetAPIData);
+             alphabetDropdown.options[alphabetDropdown.selectedIndex].text,'live-set-names', liveSetAPIData);
     } catch (err) {
         console.error('Failed to load live sets:', err);
     }
@@ -46,7 +48,7 @@ if (document.readyState === 'loading') {
     renderLiveSets();
 }
 
-function displayLiveSetsInHTML(containerId, liveSetData) {
+function displayLiveSetsInHTML(artistString, containerId, liveSetData) {
   const headers = liveSetData.values[0];
   const liveSetRows = liveSetData.values.slice(1);
 
@@ -61,7 +63,22 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
 
   liveSetRows.forEach(function (item, index, array) {
       if (item[linkIndex] != null && item[linkIndex].trim() !== "") {
+        if (artistString !== null && artistString !== "")
+        {
+            if (item[0].toLowerCase().startsWith(artistString)) {
+                matchingLiveSets.push(item);
+            }
+            else if (artistString == "#")
+            {
+                if (("0123456789@$%&_?><{()}[]").includes(item[0][0]))
+                {
+                    matchingLiveSets.push(item);
+                }
+            }
+        }
+        else{
           matchingLiveSets.push(item);
+        }
       }
     })
 
@@ -192,7 +209,16 @@ function nextLiveSetPage() {
 
 function updateLiveSetDisplay() {
   displayLiveSetsInHTML(
-    'live-set-names', liveSetAPIData
+    alphabetDropdown.options[alphabetDropdown.selectedIndex].text,'live-set-names', liveSetAPIData
   );
 }
 
+// Filter event listeners - reset to page 1 when filters change
+alphabetDropdown.addEventListener(
+     'change',
+     function() {
+       currentLiveSetPage = 1;
+       updateLiveSetDisplay();
+     },
+     false
+  );

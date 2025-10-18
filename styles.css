@@ -162,6 +162,11 @@ body {
     border: 2px inset #c0c0c0;
 }
 
+.featcode {
+    color: #00ff00;
+    font-family: "Perfect DOS VGA 437 Win", monospace;
+}
+
 .toc {
     margin: 0;
 }
