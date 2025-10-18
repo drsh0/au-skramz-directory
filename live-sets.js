@@ -29,8 +29,8 @@ async function renderLiveSets()
     try {
         const data = await fetchSheetData('live sets');
         liveSetAPIData = data;
-        const interviewRows = data.values.slice(1);
-        console.log(interviewRows.length);
+        const liveSetRows = data.values.slice(1);
+        console.log(liveSetRows.length);
         displayLiveSetsInHTML(
              'live-set-names', liveSetAPIData);
     } catch (err) {
@@ -52,6 +52,9 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
 
   const artistIndex = headers.indexOf('artist');
   const linkIndex = headers.indexOf('link');
+  const locationIndex = headers.indexOf('location');
+  const dateIndex = headers.indexOf('date');
+  const recorderIndex = headers.indexOf('recorder');
   const editorsNoteIndex = headers.indexOf('Editors Note');
 
   let matchingLiveSets = [];
@@ -77,7 +80,7 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
 
     // Pagination controls at top
     html += '<div class="pagination-controls">';
-    html += `<p>Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} interviews</p>`;
+    html += `<p>Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} live sets</p>`;
     html += '<div class="pagination-buttons">';
     html += `<button ${currentLiveSetPage === 1 ? 'disabled' : ''} onclick="prevPage()">‹ Previous</button>`;
     html += `<span>Page ${currentLiveSetPage} of ${totalPages}</span>`;
@@ -87,10 +90,22 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
 
     // Artist cards
     paginatedLiveSets.forEach(liveSet => {
-      html += '<div class="artist-card sunken-panel">';
-      html += `<h4>${liveSet[artistIndex] || 'Unknown'}</h4>`;
+    html += '<div class="artist-card sunken-panel">';
+      html += '<div class="live-set-card sunken-panel">';
+      html += `<div><h4>${liveSet[artistIndex] || 'Unknown'}</h4>`;
 
-      // Social links
+        if (liveSet[locationIndex]) {
+            html += `<p><strong>Performed At:</strong> ${liveSet[locationIndex]}</p>`;
+        }
+
+        if (liveSet[dateIndex]) {
+            html += `<p><strong>Date:</strong> ${liveSet[dateIndex]}</p>`;
+        }
+
+        if (liveSet[recorderIndex]) {
+            html += `<p><strong>Recorded By:</strong> ${liveSet[recorderIndex]}</p>`;
+        } 
+              // Social links
       if (liveSet[linkIndex] && liveSet[linkIndex] !== "") {
         html += '<div class="social-links">';
         let links = liveSet[linkIndex].split("\n");
@@ -119,9 +134,25 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
 
           html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="social-icon"></a>`;
         });
+        html += "</div>"
+    }
+    html += "</div>"
+      // Social links
+      if (liveSet[linkIndex] && liveSet[linkIndex] !== "") {
+        html += '<div class="live-set-image">';
+        let links = liveSet[linkIndex].split("\n");
+        links.forEach(link => {
+          let iconString = "";
+          let titleString = "Website";
+        if (link.includes("youtube.com")) {
+            iconString = link.replace("www", "img").replace(`watch?v=`, `vi/`) + "/0.jpg";
+            titleString = "YouTube";
+            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="live-set-image"></a>`;
+          } 
+        });
         html += '</div>';
       }
-
+        html += '</div>';
       // Lore/Editor's note
       if (liveSet[editorsNoteIndex]) {
         html += `<p class="lore-note"><strong>Editor's Note:</strong> ${liveSet[editorsNoteIndex]}</p>`;
@@ -133,9 +164,9 @@ function displayLiveSetsInHTML(containerId, liveSetData) {
     // Pagination controls at bottom
     html += '<div class="pagination-controls">';
     html += '<div class="pagination-buttons">';
-    html += `<button ${currentLiveSetPage === 1 ? 'disabled' : ''} onclick="prevInterviewPage()">‹ Previous</button>`;
+    html += `<button ${currentLiveSetPage === 1 ? 'disabled' : ''} onclick="prevLiveSetPage()">‹ Previous</button>`;
     html += `<span>Page ${currentLiveSetPage} of ${totalPages}</span>`;
-    html += `<button ${currentLiveSetPage === totalPages ? 'disabled' : ''} onclick="nextInterviewPage()">Next ›</button>`;
+    html += `<button ${currentLiveSetPage === totalPages ? 'disabled' : ''} onclick="nextLiveSetPage()">Next ›</button>`;
     html += '</div>';
     html += '</div>';
 

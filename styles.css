@@ -355,6 +355,26 @@ menu[role="tablist"] button {
     margin: 8px 0;
 }
 
+
+.live-set-card {
+    background: white;
+    display: flex;
+}
+
+.live-set-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #000080;
+}
+
+.live-set-card .live-set-image {
+    max-width: 200px;
+    max-height: 200px;
+    display: flex;
+    margin-left: auto;
+    margin-bottom: auto;
+}
+
 .venue-card .venue-links a,
 .gig-card .gig-links a {
     color: #000080;
@@ -368,6 +388,7 @@ menu[role="tablist"] button {
 }
 
 .artist-card .lore-note,
+.live-set-card .lore-note,
 .venue-card .lore-note {
     margin-top: 8px;
     padding: 6px;
