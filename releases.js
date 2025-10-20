@@ -1,4 +1,5 @@
 import {itemsPerPage} from '/consts.js'
+import {SocialCalls} from '/consts.js'
 
 let releasesAPIData = "";
 let currentReleasePage = 1;
@@ -98,29 +99,7 @@ function displayReleasesInHTML(containerId, releaseAPIData) {
         html += '<div class="social-links">';
         let links = release[linkIndex].split("\n");
         links.forEach(link => {
-          let iconString = "";
-          let titleString = "Website";
-
-          if (link.includes("bandcamp.com")) {
-            iconString = "icons/bcicon.png";
-            titleString = "Bandcamp";
-          } else if (link.includes("open.spotify.com")) {
-            iconString = "icons/spicon.png";
-            titleString = "Spotify";
-          } else if (link.includes("instagram.com")) {
-            iconString = "icons/inicon.png";
-            titleString = "Instagram";
-          } else if (link.includes("soundcloud.com")) {
-            iconString = "icons/scicon.png";
-            titleString = "SoundCloud";
-          } else if (link.includes("youtube.com")) {
-            iconString = "icons/yticon.png";
-            titleString = "YouTube";
-          } else {
-            iconString = "icons/wwicon.png";
-          }
-
-          html += `<a href="${link}" target="_blank" title="${release[nameIndex]}"><img src="${iconString}" class="social-icon"></a>`;
+          html += SocialCalls.getSocialImage(link)
         });
         html += "</div>"
     }
