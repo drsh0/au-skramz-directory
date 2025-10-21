@@ -96,26 +96,41 @@ function displayInterviewsInHTML(interviewerString, containerId, interviewData) 
     html += '</div>';
     html += '</div>';
 
-    // Artist cards
+        // Artist cards
     paginatedInterviews.forEach(interview => {
-      html += '<div class="artist-card sunken-panel">';
-      html += `<h4>${interview[artistIndex] || 'Unknown'}</h4>`;
+    html += '<div class="artist-card sunken-panel">';
+      html += '<div class="live-set-card sunken-panel">';
+      html += `<div><h4>${interview[artistIndex] || 'Unknown'}</h4>`;
 
-      // Location
-      if (interview[interviewerIndex]) {
-        html += `<p><strong>Interviewer:</strong> ${interview[interviewerIndex]}</p>`;
-      }
-
-      // Social links
+            if (interview[interviewerIndex]) {
+              html += `<p><strong>Interviewer:</strong> ${interview[interviewerIndex]}</p>`;
+            }
+              // Social links
       if (interview[linkIndex] && interview[linkIndex] !== "") {
         html += '<div class="social-links">';
         let links = interview[linkIndex].split("\n");
         links.forEach(link => {
-            html += SocialCalls.getSocialImage(link)
+          html += SocialCalls.getSocialImage(link);
+        });
+        html += "</div>"
+    }
+    html += "</div>"
+      // Social links
+      if (interview[linkIndex] && interview[linkIndex] !== "") {
+        html += '<div class="live-set-image">';
+        let links = interview[linkIndex].split("\n");
+        links.forEach(link => {
+          let iconString = "";
+          let titleString = "Website";
+        if (link.includes("youtube.com")) {
+            iconString = link.replace("www", "img").replace(`watch?v=`, `vi/`) + "/0.jpg";
+            titleString = "YouTube";
+            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="live-set-image"></a>`;
+          } 
         });
         html += '</div>';
       }
-
+        html += '</div>';
       // Lore/Editor's note
       if (interview[editorsNoteIndex]) {
         html += `<p class="lore-note"><strong>Editor's Note:</strong> ${interview[editorsNoteIndex]}</p>`;
