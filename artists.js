@@ -1,3 +1,6 @@
+import {itemsPerPage} from '/consts.js'
+import {SocialCalls} from '/consts.js'
+
 const alphabetDropdown = document.getElementById('alphabet-selector');
 const locationDropdown = document.getElementById('location-selector');
 const artistStatusDropdown = document.getElementById('artist-status-selector');
@@ -5,7 +8,6 @@ const genreDropdown = document.getElementById('genre-selector');
 
 let artistAPIData = "";
 let currentPage = 1;
-const itemsPerPage = 10;
 let viewMode = 'cards'; // 'cards' or 'compact'
 
 HTMLSelectElement.prototype.contains = function( value ) {
@@ -172,29 +174,7 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
         html += '<div class="social-links">';
         let links = artist[linkIndex].split("\n");
         links.forEach(link => {
-          let iconString = "";
-          let titleString = "Website";
-
-          if (link.includes("bandcamp.com")) {
-            iconString = "icons/bcicon.png";
-            titleString = "Bandcamp";
-          } else if (link.includes("open.spotify.com")) {
-            iconString = "icons/spicon.png";
-            titleString = "Spotify";
-          } else if (link.includes("instagram.com")) {
-            iconString = "icons/inicon.png";
-            titleString = "Instagram";
-          } else if (link.includes("soundcloud.com")) {
-            iconString = "icons/scicon.png";
-            titleString = "SoundCloud";
-          } else if (link.includes("youtube.com")) {
-            iconString = "icons/yticon.png";
-            titleString = "YouTube";
-          } else {
-            iconString = "icons/wwicon.png";
-          }
-
-          html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="social-icon"></a>`;
+            html += SocialCalls.getSocialImage(link)
         });
         html += '</div>';
       }
@@ -353,7 +333,8 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
     html += '</div>';
     html += '</div>';
 
-    // Compact table
+    // Compact table with wrapper for scrolling
+    html += '<div class="table-wrapper">';
     html += '<table class="artist-table">';
     html += '<thead><tr>';
     html += '<th>Band</th>';
@@ -401,6 +382,7 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
     });
 
     html += '</tbody></table>';
+    html += '</div>'; // Close table-wrapper
 
     // Pagination controls at bottom
     html += '<div class="pagination-controls">';
@@ -417,3 +399,8 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
   }
 }
 
+
+// Expose functions to global scope for onclick handlers
+window.toggleArtistView = toggleArtistView;
+window.prevPage = prevPage;
+window.nextPage = nextPage;

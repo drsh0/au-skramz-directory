@@ -5,21 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="straya skramz directory">
+    <meta name="description" content="au.skramz.directory">
     <meta name="keywords" content="screamo, skramz, australian music, hardcore, labels, archives">
-    <meta name="author" content="straya skramz directory">
-    
+    <meta name="author" content="au.skramz.directory">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="straya skramz directory">
-    <meta property="og:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
-    
+    <meta property="og:title" content="au.skramz.directory">
+    <meta property="og:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called australia">
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:title" content="straya skramz directory">
-    <meta property="twitter:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
-    
-    <title>straya skramz directory</title>
+    <meta property="twitter:title" content="au.skramz.directory">
+    <meta property="twitter:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called australia">
+
+    <title>au.skramz.directory</title>
     
     <!-- Favicon implementation -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧸</text></svg>">
@@ -47,7 +47,7 @@
         <!-- Greeting Window -->
         <div class="window">
             <div class="title-bar">
-                <div class="title-bar-text">skramz directory: straya</div>
+                <div class="title-bar-text">au.skramz.directory</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize"></button>
                     <button aria-label="Maximize"></button>
@@ -58,23 +58,106 @@
                 <div class="ascii-art">░█▀▀░█░█░█▀▄░█▀█░█▄█░▀▀█░█░█░█░░░▀█▀░█▀▀░█▀▀
 ░▀▀█░█▀▄░█▀▄░█▀█░█░█░▄▀░░░▀█░█░░░░█░░█▀▀░█▀▀
 ░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░░░▀░▀▀▀░▀▀▀░▀░░░▀▀▀</div>
-            </div>
-        </div>
-
-        <!-- Main Header -->
-        <div class="window">
-            <div class="title-bar">
-                <div class="title-bar-text">table of contents</div>
-            </div>
-            <div class="window-body">
-                <div class="intro-placeholder">
-                    <code class="toc">
-<a href="#archives">1. archives</a><br>
-<a href="#gig-calendar">2. gig calendar</a><br />
-<a href="#guestbook">3. guestbook</a></code>
+                <div class="intro-text">
+                    <p>this is a directory of australian skramz, screamo, emo and adjacent bands that are being collaboratively catalogued. this is a work in progress and is continuously being added to.</p>
+                    <p>we pay respect to Indigenous Elders past and present, and acknowledge the primacy of their continuous connection to country, as First Peoples.<br>
+                    sovereignty was never ceded.<br>
+                    it always was and always will be, Aboriginal land.</p>
+                    <p class="about-link"><a href="/about.html" target="_blank">about/credits</a></p>
+                </div>
+                <div class="toc-links">
+                    <p class="toc-heading">navigation</p>
+                    <p><a href="#featured-tab">1. featured</a></p>
+                    <p><a href="#releases-tab">2. releases</a></p>
+                    <p><a href="#archives">3. archives</a></p>
+                    <p><a href="#gig-calendar">4. gig calendar</a></p>
+                    <p><a href="#guestbook">5. guestbook</a></p>
                 </div>
             </div>
         </div>
+
+<!---FEATURED TAB-->
+            <div class="window" id="featured-tab">
+                <div class="title-bar">
+                    <div class="title-bar-text">featured</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="intro-placeholder">
+                        <code class="featcode">
+                            >aus skramz directory is made from volunteers who have nothing but love for the scene.
+                        </code><br />
+                        <code class="featcode">
+                            >because of this, some of us would like to highlight some of our personal favourite items from the community.
+                        </code><br />
+                        <code class="featcode">
+                            >we will do our best to regularly update this section and rotate artists/community members/etc to properly highlight the diversity of the scene.
+                        </code>
+                    </div>
+                    <div class="featured-events" id="featured-events">
+                                     <!-- Messages will be loaded from database -->
+                     <menu role="tablist" id="featured-tabs">
+                    <button aria-selected="true" aria-controls="featured-releases">releases</button>
+                    <button aria-controls="featured-venues">venues</button>
+                    <button aria-controls="featured-live-sets">live sets</button>
+                    <button aria-controls="featured-interviews">interviews</button>
+                    <button aria-controls="featured-gigs">gigs</button>
+                </menu>
+                <article role="tabpanel" id="featured-releases">
+                    <div class="section-content" id="featured-releases-content">
+
+                    </div>
+                    <script type="module" src="featured-releases.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-venues">
+                    <div class="section-content" id="featured-venues-content">
+
+                    </div>
+                    <script type="module" hidden src="featured-venues.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-live-sets">
+                    <div class="section-content" id="featured-live-sets-content">
+
+                    </div>
+                    <script type="module" hidden src="featured-live-sets.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-interviews">
+                    <div class="section-content" id="featured-interviews-content">
+
+                    </div>
+                    <script type="module" src="featured-interviews.js"></script>
+               </article>
+               <article role="tabpanel" hidden id="featured-gigs">
+                    <div class="section-content" id="featured-gigs-content">
+
+                    </div>
+                    <script type="module" src="featured-gigs.js"></script>
+               </article>
+                    </div>
+                </div>
+            </div>
+
+<!---RELEASES TAB-->
+            <div class="window" id="releases-tab">
+                <div class="title-bar">
+                    <div class="title-bar-text">releases</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="releases" id="releases">
+                        <article id="releases">                       
+                            <div class="live-set-names" id="releases-names">
+                                <!-- Messages will be loaded from database -->
+                            </div>
+                            <script type="module" src="releases.js"></script>  
+                        </areticle>   
+                    </div>
+                </div>
+            </div>
 
         <!-- Archives -->
         <div class="window" id="archives">
@@ -85,12 +168,14 @@
                 </div>
             </div>
             <div class="window-body">
-                <menu role="tablist">
+                <menu role="tablist" id="archive-tabs">
                     <button aria-selected="true" aria-controls="labels">labels</button>
                     <button aria-controls="bands">bands</button>
                     <button aria-controls="venues">venues</button>
                     <button aria-controls="video-audio">video/audio</button>
                     <button aria-controls="playlists">playlists/radio</button>
+                    <button aria-controls="interviews">interviews</button>
+                    <button aria-controls="live-sets">live sets</button>
                     <button aria-controls="links">links</button>
                 </menu>
 
@@ -171,7 +256,7 @@
                             <span style="font-size: 11px;">view: </span>
                             <a href="#" id="view-toggle" onclick="toggleArtistView(); return false;" style="font-size: 11px;">switch to compact</a>
                         </div>
-                        <script src="artists.js"></script>
+                        <script type="module" src="artists.js"></script>
                         <div class="artist-names" id="artist-names">
                              <!-- Messages will be loaded from database -->
                         </div>
@@ -367,6 +452,57 @@
                     </ul>
                 </article>
 
+                <article role="tabpanel" hidden id="interviews">
+                        <div class="filter-group">
+                            <label for="interviewer-selector" style="font-size: 11px;">interviewer:</label>
+                            <select name="interviewer" id="interviewer-selector" class="dropdown-margin"><option ></option></select>
+                        </div>
+                        <script type="module" src="interviews.js"></script>
+                        <div class="interview-names" id="interview-names">
+                            <!-- Messages will be loaded from database -->
+                        </div>
+                    </article>
+
+                <article role="tabpanel" hidden id="live-sets">
+                        <div class="filter-group">
+                             <label for="alphabet-live-set-selector" style="font-size: 11px;">letter:</label>
+                                <select name="alphabet" id="alphabet-live-set-selector" class="dropdown-margin">
+                                    <option ></option>
+                                    <option >#</option>
+                                    <option >a</option>
+                                    <option >b</option>
+                                    <option >c</option>
+                                    <option >d</option>
+                                    <option >e</option>
+                                    <option >f</option>
+                                    <option >g</option>
+                                    <option >h</option>
+                                    <option >i</option>
+                                    <option >j</option>
+                                    <option >k</option>
+                                    <option >l</option>
+                                    <option >m</option>
+                                    <option >n</option>
+                                    <option >o</option>
+                                    <option >p</option>
+                                    <option >q</option>
+                                    <option >r</option>
+                                    <option >s</option>
+                                    <option >t</option>
+                                    <option >u</option>
+                                    <option >v</option>
+                                    <option >w</option>
+                                    <option >x</option>
+                                    <option >y</option>
+                                    <option >z</option>
+                                </select>
+                        </div>
+                        <script type="module" src="live-sets.js"></script>
+                        <div class="live-set-names" id="live-set-names">
+                            <!-- Messages will be loaded from database -->
+                        </div>
+                    </article>
+
                 <article role="tabpanel" hidden id="links" class="archive-section">
                     <h4>discord servers</h4>
                     <ul class="tree-view">
@@ -463,12 +599,6 @@
         <div class="back-to-top">
             <button onclick="scrollToTop()">back to top</button>
         </div>
-
-        <!-- Footer acknowledgement -->
-        <blockquote class="footer-quote">
-            sovereignty was never ceded. always was, always will be aboriginal land.
-                <br><a href="/about.html">credits/about</a>
-        </blockquote>
     </div>
 
     <script>
@@ -632,8 +762,8 @@
             loadMessages();
 
             // Tab functionality
-            const tabButtons = document.querySelectorAll('menu[role="tablist"] button');
-            const tabPanels = document.querySelectorAll('article[role="tabpanel"]');
+            const tabButtons = document.querySelectorAll('menu[id="archive-tabs"] button');
+            const tabPanels = document.querySelectorAll('div[id="archives"] div[class="window-body"] article[role="tabpanel"]');
 
             tabButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -651,6 +781,29 @@
                     }
                 });
             });
+
+                        // Tab functionality
+            const featuredTabButtons = document.querySelectorAll('menu[id="featured-tabs"] button');
+            const featuredTabPanels = document.querySelectorAll('div[id="featured-tab"] div[class="window-body"] article[role="tabpanel"]');
+
+            featuredTabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove aria-selected from all buttons
+                    featuredTabButtons.forEach(btn => btn.removeAttribute('aria-selected'));
+                    // Add aria-selected to clicked button
+                    this.setAttribute('aria-selected', 'true');
+
+                    // Hide all panels
+                    featuredTabPanels.forEach(panel => panel.setAttribute('hidden', ''));
+                    // Show target panel
+                    const targetPanel = document.getElementById(this.getAttribute('aria-controls'));
+                    if (targetPanel) {
+                        targetPanel.removeAttribute('hidden');
+                    }
+                });
+            });
+
+
         });
     </script>
 </body>
