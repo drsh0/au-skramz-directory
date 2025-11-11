@@ -333,7 +333,8 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
     html += '</div>';
     html += '</div>';
 
-    // Compact table
+    // Compact table with wrapper for scrolling
+    html += '<div class="table-wrapper">';
     html += '<table class="artist-table">';
     html += '<thead><tr>';
     html += '<th>Band</th>';
@@ -381,6 +382,7 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
     });
 
     html += '</tbody></table>';
+    html += '</div>'; // Close table-wrapper
 
     // Pagination controls at bottom
     html += '<div class="pagination-controls">';
@@ -397,3 +399,8 @@ function displayArtistsInTable(artistString, statusString, cityString, genreStri
   }
 }
 
+
+// Expose functions to global scope for onclick handlers
+window.toggleArtistView = toggleArtistView;
+window.prevPage = prevPage;
+window.nextPage = nextPage;

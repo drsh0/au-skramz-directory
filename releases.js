@@ -77,15 +77,14 @@ function displayReleasesInHTML(containerId, releaseAPIData) {
     html += '<div class="pagination-controls">';
     html += `<p>Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} releases</p>`;
     html += '<div class="pagination-buttons">';
-    html += `<button ${currentReleasePage === 1 ? 'disabled' : ''} onclick="prevPage()">‹ Previous</button>`;
+    html += `<button ${currentReleasePage === 1 ? 'disabled' : ''} onclick="prevReleasesPage()">‹ Previous</button>`;
     html += `<span>Page ${currentReleasePage} of ${totalPages}</span>`;
-    html += `<button ${currentReleasePage === totalPages ? 'disabled' : ''} onclick="nextPage()">Next ›</button>`;
+    html += `<button ${currentReleasePage === totalPages ? 'disabled' : ''} onclick="nextReleasesPage()">Next ›</button>`;
     html += '</div>';
     html += '</div>';
 
     // Artist cards
     paginatedLiveSets.forEach(release => {
-      html += '<div class="artist-card sunken-panel">';
       html += '<div class="live-set-card sunken-panel">';
       html += `<div><h4>${release[artistIndex] || 'Unknown'}</h4>`;
       html += `<h4>${release[nameIndex] || 'Unknown'}</h4>`;
@@ -107,10 +106,9 @@ function displayReleasesInHTML(containerId, releaseAPIData) {
       // Artwork links
       if (release[artworklinkIndex] && release[artworklinkIndex] !== "") {
         html += '<div class="live-set-image">';
-        html += `<a target="_blank" title="${release[nameIndex]}"><img src="${release[artworklinkIndex]}" class="live-set-image"></a>`;
+        html += `<a target="_blank" title="${release[nameIndex]}"><img src="${release[artworklinkIndex]}"></a>`;
         html += '</div>';
       }
-        html += '</div>';
       // Lore/Editor's note
       if (release[editorsNoteIndex]) {
         html += `<p class="lore-note"><strong>Editor's Note:</strong> ${release[editorsNoteIndex]}</p>`;
@@ -153,3 +151,7 @@ function updateReleaseDisplay() {
     'releases-names', releasesAPIData
   );
 }
+
+// Expose pagination functions to global scope for onclick handlers
+window.prevReleasesPage = prevReleasesPage;
+window.nextReleasesPage = nextReleasesPage;

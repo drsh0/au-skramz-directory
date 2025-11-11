@@ -5,21 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="straya skramz directory">
+    <meta name="description" content="au.skramz.directory">
     <meta name="keywords" content="screamo, skramz, australian music, hardcore, labels, archives">
-    <meta name="author" content="straya skramz directory">
-    
+    <meta name="author" content="au.skramz.directory">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="straya skramz directory">
-    <meta property="og:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
-    
+    <meta property="og:title" content="au.skramz.directory">
+    <meta property="og:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called australia">
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:title" content="straya skramz directory">
-    <meta property="twitter:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called straya">
-    
-    <title>straya skramz directory</title>
+    <meta property="twitter:title" content="au.skramz.directory">
+    <meta property="twitter:description" content="a site dedicated to archiving the screamo/emo and adjacent scenes in so-called australia">
+
+    <title>au.skramz.directory</title>
     
     <!-- Favicon implementation -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧸</text></svg>">
@@ -47,7 +47,7 @@
         <!-- Greeting Window -->
         <div class="window">
             <div class="title-bar">
-                <div class="title-bar-text">skramz directory: straya</div>
+                <div class="title-bar-text">au.skramz.directory</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize"></button>
                     <button aria-label="Maximize"></button>
@@ -58,21 +58,20 @@
                 <div class="ascii-art">░█▀▀░█░█░█▀▄░█▀█░█▄█░▀▀█░█░█░█░░░▀█▀░█▀▀░█▀▀
 ░▀▀█░█▀▄░█▀▄░█▀█░█░█░▄▀░░░▀█░█░░░░█░░█▀▀░█▀▀
 ░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░░░▀░▀▀▀░▀▀▀░▀░░░▀▀▀</div>
-            </div>
-        </div>
-
-        <!-- Main Header -->
-        <div class="window">
-            <div class="title-bar">
-                <div class="title-bar-text">table of contents</div>
-            </div>
-            <div class="window-body">
-                <div class="intro-placeholder">
-                    <code class="toc">
-<a href="#featured-tab">1. featured</a><br>
-<a href="#archives">2. archives</a><br />
-<a href="#gig-calendar">3. gig calendar</a><br />
-<a href="#guestbook">4. guestbook</a></code>
+                <div class="intro-text">
+                    <p>this is a directory of australian skramz, screamo, emo and adjacent bands that are being collaboratively catalogued. this is a work in progress and is continuously being added to.</p>
+                    <p>we pay respect to Indigenous Elders past and present, and acknowledge the primacy of their continuous connection to country, as First Peoples.<br>
+                    sovereignty was never ceded.<br>
+                    it always was and always will be, Aboriginal land.</p>
+                    <p class="about-link"><a href="/about.html" target="_blank">about/credits</a></p>
+                </div>
+                <div class="toc-links">
+                    <p class="toc-heading">navigation</p>
+                    <p><a href="#featured-tab">1. featured</a></p>
+                    <p><a href="#releases-tab">2. releases</a></p>
+                    <p><a href="#archives">3. archives</a></p>
+                    <p><a href="#gig-calendar">4. gig calendar</a></p>
+                    <p><a href="#guestbook">5. guestbook</a></p>
                 </div>
             </div>
         </div>
@@ -102,9 +101,9 @@
                      <menu role="tablist" id="featured-tabs">
                     <button aria-selected="true" aria-controls="featured-releases">releases</button>
                     <button aria-controls="featured-venues">venues</button>
-                    <button aria-controls="featured-live-sets">live set</button>
+                    <button aria-controls="featured-live-sets">live sets</button>
                     <button aria-controls="featured-interviews">interviews</button>
-                    <button aria-controls="featured-gigs">upcoming gigs</button>
+                    <button aria-controls="featured-gigs">gigs</button>
                 </menu>
                 <article role="tabpanel" id="featured-releases">
                     <div class="section-content" id="featured-releases-content">
@@ -600,12 +599,6 @@
         <div class="back-to-top">
             <button onclick="scrollToTop()">back to top</button>
         </div>
-
-        <!-- Footer acknowledgement -->
-        <blockquote class="footer-quote">
-            sovereignty was never ceded. always was, always will be aboriginal land.
-                <br><a href="/about.html">credits/about</a>
-        </blockquote>
     </div>
 
     <script>

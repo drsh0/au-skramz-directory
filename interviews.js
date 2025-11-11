@@ -90,15 +90,14 @@ function displayInterviewsInHTML(interviewerString, containerId, interviewData) 
     html += '<div class="pagination-controls">';
     html += `<p>Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} interviews</p>`;
     html += '<div class="pagination-buttons">';
-    html += `<button ${currentInterviewPage === 1 ? 'disabled' : ''} onclick="prevPage()">‹ Previous</button>`;
+    html += `<button ${currentInterviewPage === 1 ? 'disabled' : ''} onclick="prevInterviewPage()">‹ Previous</button>`;
     html += `<span>Page ${currentInterviewPage} of ${totalPages}</span>`;
-    html += `<button ${currentInterviewPage === totalPages ? 'disabled' : ''} onclick="nextPage()">Next ›</button>`;
+    html += `<button ${currentInterviewPage === totalPages ? 'disabled' : ''} onclick="nextInterviewPage()">Next ›</button>`;
     html += '</div>';
     html += '</div>';
 
         // Artist cards
     paginatedInterviews.forEach(interview => {
-    html += '<div class="artist-card sunken-panel">';
       html += '<div class="live-set-card sunken-panel">';
       html += `<div><h4>${interview[artistIndex] || 'Unknown'}</h4>`;
 
@@ -125,12 +124,11 @@ function displayInterviewsInHTML(interviewerString, containerId, interviewData) 
         if (link.includes("youtube.com")) {
             iconString = link.replace("www", "img").replace(`watch?v=`, `vi/`) + "/0.jpg";
             titleString = "YouTube";
-            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="live-set-image"></a>`;
-          } 
+            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" alt="${titleString}"></a>`;
+          }
         });
         html += '</div>';
       }
-        html += '</div>';
       // Lore/Editor's note
       if (interview[editorsNoteIndex]) {
         html += `<p class="lore-note"><strong>Editor's Note:</strong> ${interview[editorsNoteIndex]}</p>`;
@@ -173,6 +171,10 @@ function updateInterviewDisplay() {
     interviewerDropdown.options[interviewerDropdown.selectedIndex].text,'interview-names', interviewAPIData
   );
 }
+
+// Expose pagination functions to global scope for onclick handlers
+window.prevInterviewPage = prevInterviewPage;
+window.nextInterviewPage = nextInterviewPage;
 
 interviewerDropdown.addEventListener(
      'change',

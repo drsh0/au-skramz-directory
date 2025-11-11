@@ -61,9 +61,9 @@ function displayFeaturedLiveSetsInHTML(containerId, featureData) {
           let iconString = "";
           let titleString = "Website";
         if (link.includes("youtube.com") && link.includes("embed")) {
-            html += `<iframe width="420" height="315" src="${link}" allowfullscreen></iframe>"`;
-        } 
-        else {          
+            html += `<div class="iframe-container"><iframe src="${link}" allowfullscreen></iframe></div>`;
+        }
+        else {
             html += SocialCalls.getSocialImage(link)
         }
         });

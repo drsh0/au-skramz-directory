@@ -100,15 +100,14 @@ function displayLiveSetsInHTML(artistString, containerId, liveSetData) {
     html += '<div class="pagination-controls">';
     html += `<p>Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} live sets</p>`;
     html += '<div class="pagination-buttons">';
-    html += `<button ${currentLiveSetPage === 1 ? 'disabled' : ''} onclick="prevPage()">‹ Previous</button>`;
+    html += `<button ${currentLiveSetPage === 1 ? 'disabled' : ''} onclick="prevLiveSetPage()">‹ Previous</button>`;
     html += `<span>Page ${currentLiveSetPage} of ${totalPages}</span>`;
-    html += `<button ${currentLiveSetPage === totalPages ? 'disabled' : ''} onclick="nextPage()">Next ›</button>`;
+    html += `<button ${currentLiveSetPage === totalPages ? 'disabled' : ''} onclick="nextLiveSetPage()">Next ›</button>`;
     html += '</div>';
     html += '</div>';
 
     // Artist cards
     paginatedLiveSets.forEach(liveSet => {
-    html += '<div class="artist-card sunken-panel">';
       html += '<div class="live-set-card sunken-panel">';
       html += `<div><h4>${liveSet[artistIndex] || 'Unknown'}</h4>`;
 
@@ -143,12 +142,11 @@ function displayLiveSetsInHTML(artistString, containerId, liveSetData) {
         if (link.includes("youtube.com")) {
             iconString = link.replace("www", "img").replace(`watch?v=`, `vi/`) + "/0.jpg";
             titleString = "YouTube";
-            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" class="live-set-image"></a>`;
-          } 
+            html += `<a href="${link}" target="_blank" title="${titleString}"><img src="${iconString}" alt="${titleString}"></a>`;
+          }
         });
         html += '</div>';
       }
-        html += '</div>';
       // Lore/Editor's note
       if (liveSet[editorsNoteIndex]) {
         html += `<p class="lore-note"><strong>Editor's Note:</strong> ${liveSet[editorsNoteIndex]}</p>`;
@@ -191,6 +189,10 @@ function updateLiveSetDisplay() {
     alphabetDropdown.options[alphabetDropdown.selectedIndex].text,'live-set-names', liveSetAPIData
   );
 }
+
+// Expose pagination functions to global scope for onclick handlers
+window.prevLiveSetPage = prevLiveSetPage;
+window.nextLiveSetPage = nextLiveSetPage;
 
 // Filter event listeners - reset to page 1 when filters change
 alphabetDropdown.addEventListener(
