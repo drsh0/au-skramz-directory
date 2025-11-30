@@ -77,6 +77,18 @@ if (document.readyState === 'loading') {
     renderArtists();
 }
 
+function getArtistInfo(artistName) {
+  var htmlText = "";
+  fetch(`docs/${artistName.trim()}.txt`)
+    .then(text => {
+      htmlText = text;
+    })
+  //<p>Some text in the Modal..</p>
+  var html = `<h2>${artistName}</h2>`;
+  html += htmlText;
+  return html;
+}
+
 function displayArtistsInHTML(artistString, statusString, cityString, genreString, containerId, artistData) {
   const headers = artistData.values[0];
   const artistRows = artistData.values.slice(1);
@@ -87,8 +99,9 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
   const linkIndex = headers.indexOf('link');
   const loreIndex = headers.indexOf('lore');
   const aliasIndex = headers.indexOf('other known aliases');
+  const moreInfoIndex = headers.indexOf('more info available');
 
-  let matchingArtists = [];
+  let matchingArtists, describedArtists = [];
 
   if (artistString == "" || artistString == null)
   {
@@ -128,7 +141,6 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedArtists = matchingArtists.slice(startIndex, endIndex);
-
   const container = document.getElementById(containerId);
 
   if (matchingArtists.length > 0) {
@@ -147,7 +159,16 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
     // Artist cards
     paginatedArtists.forEach(artist => {
       html += '<div class="artist-card sunken-panel">';
-      html += `<h4>${artist[0] || 'Unknown'}</h4>`;
+      var artistName = `${artist[0] || 'Unknown'}`;
+      html += `<h4>${artistName}</h4>`;
+      //JAVASCRIPT DOESN'T REALLY LIKE CHECKING IF A FILE EXISTS, IT JUST ASSUMES IT DOES
+      //SO LET'S MANUALLY CHANGE THE SPREADSHEET TO ALLOW FOR WHICH ARTISTS CAN HAVE MORE INFO SHOWN
+      if (artist[moreInfoIndex] == "yes")
+      {
+        var infoText = getArtistInfo(artistName);
+        describedArtists.push(artistName)
+        html += `<button id="${artistName}btn">Open Modal</button><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span>${infoText}</div></div>`;
+      }
 
       // Location
       if (artist[locationIndex]) {
@@ -197,6 +218,19 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
     html += '</div>';
 
     container.innerHTML = html;
+
+    describedArtists.forEach(a => {
+      var modal = document.getElementById(`${a}modal`);
+      var btn = document.getElementById(`${a}btn`);
+      var span = document.getElementById(`${a}close`);
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+    }
+    )
   } else {
     container.innerHTML = `<p>No artists found.</p>`;
   }
