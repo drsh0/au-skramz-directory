@@ -77,16 +77,23 @@ if (document.readyState === 'loading') {
     renderArtists();
 }
 
-function getArtistInfo(artistName) {
-  var htmlText = "";
-  fetch(`docs/${artistName.trim()}.txt`)
-    .then(text => {
-      htmlText = text;
+async function fetchArtistExtraData(artistName)
+{
+  let artistData = await new Promise((resolve) => {
+    fetch(`docs/${artistName.replace(/\s+/g, '')}.txt`).then(response => response.text())
+    .then((data) => {
+      resolve(data)
     })
-  //<p>Some text in the Modal..</p>
-  var html = `<h2>${artistName}</h2>`;
-  html += htmlText;
-  return html;
+  })
+  return artistData
+}
+
+async function getArtistInfo(artistName) {
+  var htmlData = `<h2>${artistName}</h2>`;
+  let htmlText = await new Promise((resolve) => {fetchArtistExtraData(artistName).then(artistData => {resolve(artistData)})})
+  htmlData += htmlText
+  const container = document.getElementById(`${artistName}modal-content`);
+  container.innerHTML = htmlData
 }
 
 function displayArtistsInHTML(artistString, statusString, cityString, genreString, containerId, artistData) {
@@ -161,13 +168,12 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
       html += '<div class="artist-card sunken-panel">';
       var artistName = `${artist[0] || 'Unknown'}`;
       html += `<h4>${artistName}</h4>`;
-      //JAVASCRIPT DOESN'T REALLY LIKE CHECKING IF A FILE EXISTS, IT JUST ASSUMES IT DOES
+      //JAVASCRIPT DOESN'T REALLY LIKE CHECKING IF A FILE EXISTS, IT JUST ASSUMES IT DOESs
       //SO LET'S MANUALLY CHANGE THE SPREADSHEET TO ALLOW FOR WHICH ARTISTS CAN HAVE MORE INFO SHOWN
       if (artist[moreInfoIndex] == "yes")
       {
-        var infoText = getArtistInfo(artistName);
         describedArtists.push(artistName)
-        html += `<button id="${artistName}btn">Open Modal</button><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span>${infoText}</div></div>`;
+        html += `<p><button id="${artistName}btn">Open Modal</button><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span><div class="section-content" id="${artistName}modal-content"></div></div></div></p>`;
       }
 
       // Location
@@ -229,6 +235,7 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
       span.onclick = function() {
         modal.style.display = "none";
       }
+      getArtistInfo(a)
     }
     )
   } else {
