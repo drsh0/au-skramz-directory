@@ -173,7 +173,7 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
       if (artist[moreInfoIndex] == "yes")
       {
         describedArtists.push(artistName)
-        html += `<p><button id="${artistName}btn">Read More</button><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span><div class="section-content" id="${artistName}modal-content"></div></div></div></p>`;
+        html += `<p><a id="${artistName}btn" href="#">Read More</a><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span><div class="section-content" id="${artistName}modal-content"></div></div></div></p>`;
       }
 
       // Location
