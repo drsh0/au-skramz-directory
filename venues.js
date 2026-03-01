@@ -52,7 +52,6 @@ function displayVenuesInHTML(venueString, statusString, containerId, venueData) 
 
       // Venue name
       html += `<h4>${venue[nameIndex] || 'Unknown Venue'}</h4>`;
-
       // Address
       if (venue[addressIndex]) {
         html += `<p><strong>Address:</strong> ${venue[addressIndex]}</p>`;
