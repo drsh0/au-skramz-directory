@@ -108,8 +108,8 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
   const aliasIndex = headers.indexOf('other known aliases');
   const moreInfoIndex = headers.indexOf('more info available');
 
-  let matchingArtists, describedArtists = [];
-
+  let matchingArtists = [];
+  let describedArtists = [];
   if (artistString == "" || artistString == null)
   {
     matchingArtists = artistRows;
