@@ -397,7 +397,7 @@ menu[role="tablist"] button {
 
     .artist-filters label {
         min-width: 50px;
-        font-size: 10px !important;
+        font-size: 10px ;
     }
 
     .artist-filters select {
@@ -415,7 +415,6 @@ menu[role="tablist"] button {
     margin-bottom: 12px;
     border: 2px groove #dfdfdf;
     position: relative;
-    z-index: 20;
 
 }
 
@@ -818,7 +817,7 @@ menu[role="tablist"] button {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 99999; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -826,18 +825,24 @@ menu[role="tablist"] button {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-z-index: 9999;
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
+ background: none ;
+  padding: 0px;
+  border: none ;
   width: 80%; /* Could be more or less, depending on screen size */
   z-index: 10000;
 }
+
+/* Only XP windows inside modals get extra padding */
+.modal-content .window-body {
+  padding: 12px 16px;
+}
+
 
 /* The Close Button */
 .modal-popup-close {
@@ -852,4 +857,10 @@ z-index: 9999;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Override XP.css tab stacking */
+menu button[aria-selected="true"] {
+  z-index: auto !important;   /* or 1, whichever you prefer */
+  position: relative !important;
 }
