@@ -88,12 +88,38 @@ async function fetchArtistExtraData(artistName)
   return artistData
 }
 
-async function getArtistInfo(artistName) {
-  var htmlData = `<h2>${artistName}</h2>`;
+async function getArtistInfo(artistName, modal) {
   let htmlText = await new Promise((resolve) => {fetchArtistExtraData(artistName).then(artistData => {resolve(artistData)})})
-  htmlData += htmlText
+  const htmlData = `
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">${artistName}</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close" id="${artistName}modal-close"></button>
+        </div>
+      </div>
+
+      <div class="window-body">
+
+        <div class="artist-info-content">
+          <h2>${artistName}</h2>
+          ${htmlText}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  //htmlData += `<h2>${artistName}</h2>`;
   const container = document.getElementById(`${artistName}modal-content`);
-  container.innerHTML = htmlData
+  container.innerHTML = htmlData;
+  const xpClose = document.getElementById(`${artistName}modal-close`);
+  if (xpClose) {
+      xpClose.onclick = () => {
+       modal.style.display = "none";
+    };
+  }
 }
 
 function displayArtistsInHTML(artistString, statusString, cityString, genreString, containerId, artistData) {
@@ -173,7 +199,7 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
       if (artist[moreInfoIndex] == "yes")
       {
         describedArtists.push(artistName)
-        html += `<p><a id="${artistName}btn" href="#">Read More</a><div id="${artistName}modal" class="modal"><div class="modal-content"><span class="modal-popup-close" id="${artistName}close">&times;</span><div class="section-content" id="${artistName}modal-content"></div></div></div></p>`;
+        html += `<p><a id="${artistName}btn" href="#">Read More</a><div id="${artistName}modal" class="modal"><div class="modal-content"><div class="section-content" id="${artistName}modal-content"></div></div></div></p>`;
       }
 
       // Location
@@ -228,14 +254,10 @@ function displayArtistsInHTML(artistString, statusString, cityString, genreStrin
     describedArtists.forEach(a => {
       var modal = document.getElementById(`${a}modal`);
       var btn = document.getElementById(`${a}btn`);
-      var span = document.getElementById(`${a}close`);
       btn.onclick = function() {
         modal.style.display = "block";
       }
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-      getArtistInfo(a)
+      getArtistInfo(a,modal)
     }
     )
   } else {
