@@ -1,0 +1,32 @@
+name: Package site
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package site
+        run: |
+          mkdir -p package
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.gitignore' \
+            --exclude='README.md' \
+            --exclude='LICENCE.md' \
+            --exclude='TODO.md' \
+            --exclude='server.bat' \
+            --exclude='worker.js' \
+            ./ package/
+
+          cd package
+          zip -r ../site.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site.zip
